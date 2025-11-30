@@ -1,6 +1,6 @@
 # Architecture Decision Records (ADRs)
 
-**Total ADRs:** 16
+**Total ADRs:** 20
 **Last Updated:** 2025-11-29
 
 ---
@@ -33,6 +33,15 @@
 | [ADR-0015](./adr-0015-file-storage-cdn.md) | File Storage & CDN | Proposed | **Buy** - DigitalOcean Spaces |
 | [ADR-0016](./adr-0016-error-monitoring-logging.md) | Error Monitoring & Logging | Proposed | **Buy** - Flare |
 
+### Application Architecture (ADR-0017 to ADR-0020)
+
+| ADR | Decision | Status | Approach |
+|-----|----------|--------|----------|
+| [ADR-0017](./adr-0017-marketing-site-architecture.md) | Marketing Site Architecture | Proposed | **Build** - Statamic + Laravel |
+| [ADR-0018](./adr-0018-client-portal-architecture.md) | Client Portal Architecture | Proposed | **Build** - Livewire Portal |
+| [ADR-0019](./adr-0019-notification-system.md) | Notification System | Proposed | **Build** - Laravel Notifications |
+| [ADR-0020](./adr-0020-performance-optimization.md) | Performance Optimization | Proposed | **Build** - Multi-layer Caching |
+
 ---
 
 ## Build vs Buy Summary
@@ -45,6 +54,10 @@
 - Time Tracking (REQ-PROJ-005)
 - Security & Data Protection (REQ-SEC-*)
 - Analytics & Reporting (REQ-ANLY-*)
+- Marketing Site Architecture (REQ-MKTG-*)
+- Client Portal (REQ-PORT-*)
+- Notification System (REQ-COMM-001, 003, 005, 006)
+- Performance Optimization (REQ-PERF-001, 002, 005, 006)
 
 **Rationale:** Core agency operations requiring deep integration with each other and the client portal. Custom build provides data ownership, no per-seat costs, and seamless workflows.
 
@@ -124,6 +137,10 @@ Based on these ADRs, the platform technology stack includes:
 | ADR-0014 | REQ-INTG-001, REQ-BILL-002 |
 | ADR-0015 | REQ-INTG-003, REQ-PERF-004 |
 | ADR-0016 | REQ-INTG-010, REQ-SEC-005, REQ-PERF-008 |
+| ADR-0017 | REQ-MKTG-001, REQ-MKTG-002, REQ-MKTG-003, REQ-MKTG-004, REQ-MKTG-007, REQ-MKTG-008, REQ-MKTG-009 |
+| ADR-0018 | REQ-PORT-001, REQ-PORT-002, REQ-PORT-003, REQ-PORT-004, REQ-PORT-005, REQ-PORT-006, REQ-PORT-008, REQ-PORT-009 |
+| ADR-0019 | REQ-COMM-001, REQ-COMM-003, REQ-COMM-005, REQ-COMM-006 |
+| ADR-0020 | REQ-PERF-001, REQ-PERF-002, REQ-PERF-005, REQ-PERF-006 |
 
 ---
 
@@ -193,3 +210,4 @@ ADR-0008 (Transactional Email) ◄── All notification features
 |------------|----------------------------------------|
 | 2025-11-29 | Initial creation of 10 ADRs            |
 | 2025-11-29 | Added 6 infrastructure/operations ADRs (0011-0016) |
+| 2025-11-29 | Added 4 application architecture ADRs (0017-0020) |
