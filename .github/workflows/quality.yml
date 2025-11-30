@@ -1,0 +1,115 @@
+name: Documentation Quality Gate
+
+on:
+  pull_request:
+    branches:
+      - main
+      - develop
+    paths:
+      - 'docs/**'
+      - 'templates/**'
+      - 'README.md'
+      - '.vale.ini'
+  push:
+    branches:
+      - main
+
+jobs:
+  lint-documentation:
+    name: Lint Documentation
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Mermaid CLI
+        run: npm install -g @mermaid-js/mermaid-cli
+
+      - name: Install Vale
+        run: |
+          wget https://github.com/errata-ai/vale/releases/download/v3.0.7/vale_3.0.7_Linux_64-bit.tar.gz
+          tar -xzf vale_3.0.7_Linux_64-bit.tar.gz
+          sudo mv vale /usr/local/bin/vale
+          vale --version
+
+      - name: Setup Vale Styles
+        run: |
+          mkdir -p .vale/styles
+          vale sync || echo "Vale sync completed"
+
+      - name: Run Vale Linter
+        run: make lint
+        continue-on-error: false
+
+      - name: Validate Relative Links
+        run: make validate-links
+
+      - name: Check Traceability
+        run: |
+          echo "Validating traceability links..."
+          if grep -r "implements_requirement:" docs/03-decisions/ 2>/dev/null; then
+            echo "✓ ADRs contain requirement references"
+          else
+            echo "⚠ No ADRs found or missing requirement references"
+          fi
+          if grep -r "Satisfied By" docs/01-requirements/ 2>/dev/null; then
+            echo "✓ Requirements contain ADR references"
+          else
+            echo "⚠ No requirements found or missing ADR references"
+          fi
+
+      - name: Validate Mermaid Diagrams
+        run: |
+          echo "Checking for Mermaid diagrams in architecture docs..."
+          if find docs/02-architecture -name "*.md" -exec grep -l '```mermaid' {} \; 2>/dev/null | grep -q .; then
+            echo "✓ Architecture documents contain Mermaid diagrams"
+          else
+            echo "⚠ No architecture documents found or missing diagrams"
+          fi
+
+  validate-openapi:
+    name: Validate OpenAPI Specifications
+    runs-on: ubuntu-latest
+    if: contains(github.event.pull_request.changed_files, 'docs/05-api/')
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Spectral
+        run: npm install -g @stoplight/spectral-cli
+
+      - name: Lint OpenAPI Specs
+        run: |
+          if find docs/05-api -name "openapi.yaml" -o -name "openapi.yml" 2>/dev/null | grep -q .; then
+            find docs/05-api -name "openapi.y*ml" -exec spectral lint {} \;
+          else
+            echo "No OpenAPI specifications found"
+          fi
+
+  quality-summary:
+    name: Quality Gate Summary
+    runs-on: ubuntu-latest
+    needs: [lint-documentation]
+    if: always()
+
+    steps:
+      - name: Check Quality Gate Status
+        run: |
+          if [ "${{ needs.lint-documentation.result }}" == "success" ]; then
+            echo "✓ Documentation linting passed"
+          else
+            echo "✗ Documentation linting failed"
+            exit 1
+          fi

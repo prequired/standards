@@ -1,0 +1,51 @@
+# Operating System Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+*~
+
+# Vale Artifacts
+.vale/
+.vale/storage/
+*.lock
+
+# Node.js (Mermaid CLI)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+# Editor Directories and Files
+.vscode/
+.idea/
+*.swp
+*.swo
+*.bak
+*.tmp
+*.code-workspace
+
+# Build Artifacts
+dist/
+build/
+out/
+*.log
+
+# Environment Variables
+.env
+.env.local
+.env.*.local
+
+# Temporary Files
+tmp/
+temp/
+*.cache
+
+# Setup script backup
+setup_repo.sh
+setup_repo_complete.sh
