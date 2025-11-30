@@ -13,6 +13,9 @@ This directory contains security policies, guidelines, and compliance documentat
 | Document | Description |
 |----------|-------------|
 | [security-policies.md](./security-policies.md) | Comprehensive security policies and controls |
+| [incident-response.md](./incident-response.md) | Security incident response procedures |
+| [disaster-recovery.md](./disaster-recovery.md) | Disaster recovery plan and procedures |
+| [compliance-matrix.md](./compliance-matrix.md) | Compliance status and SLA commitments |
 
 ## Quick Reference
 

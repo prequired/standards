@@ -52,13 +52,15 @@ See [SOP-002: Quality Gates](./sop-002-quality-gates.md) for details.
 
 ## SOP Numbering
 
-| Range | Category |
-|-------|----------|
-| 000-009 | Core governance and traceability |
-| 010-019 | Documentation standards |
-| 020-029 | Development processes |
-| 030-039 | Quality assurance |
-| 040-049 | Security and compliance |
+| Range | Category | Status |
+|-------|----------|--------|
+| 000-009 | Core governance and traceability | **Active** (000-004) |
+| 010-019 | Documentation standards | Reserved for future use |
+| 020-029 | Development processes | Reserved for future use |
+| 030-039 | Quality assurance | Reserved for future use |
+| 040-049 | Security and compliance | Reserved for future use |
+
+**Note:** Ranges 010-049 are reserved for future SOPs. Current core governance (000-004) covers essential standards. Additional SOPs will be created as needs arise.
 
 ## Governance Hierarchy
 
