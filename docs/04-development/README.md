@@ -1,6 +1,6 @@
 # Development Documentation
 
-**Last Updated:** 2025-11-29
+**Last Updated:** 2025-11-30
 
 ---
 
@@ -10,6 +10,8 @@ This directory contains development standards, workflows, and guidelines for the
 
 ## Documents
 
+### Core Standards
+
 | Document | Description | Audience |
 |----------|-------------|----------|
 | [dev-standards.md](./dev-standards.md) | PHP/Laravel coding conventions | All developers |
@@ -17,6 +19,24 @@ This directory contains development standards, workflows, and guidelines for the
 | [code-review.md](./code-review.md) | PR process and review guidelines | All developers |
 | [setup-guide.md](./setup-guide.md) | Local development environment setup | New developers |
 | [configuration-management.md](./configuration-management.md) | Environment and secrets management | All developers |
+
+### Framework-Specific Guides
+
+| Document | Description | Audience |
+|----------|-------------|----------|
+| [livewire-conventions.md](./livewire-conventions.md) | Livewire 3 component patterns | Frontend developers |
+| [filament-conventions.md](./filament-conventions.md) | Filament 3 admin panel guide | Admin developers |
+| [statamic-setup.md](./statamic-setup.md) | Statamic 5 CMS integration | CMS developers |
+
+### Architecture & Patterns
+
+| Document | Description | Audience |
+|----------|-------------|----------|
+| [migration-guide.md](./migration-guide.md) | Database migrations & seeding | All developers |
+| [exception-handling.md](./exception-handling.md) | Error handling hierarchy | All developers |
+| [queue-jobs-guide.md](./queue-jobs-guide.md) | Background jobs & queues | Backend developers |
+| [service-providers.md](./service-providers.md) | Dependency injection & container | Senior developers |
+| [auth-guide.md](./auth-guide.md) | Authentication & authorization | All developers |
 
 ## Quick Reference
 
@@ -145,4 +165,5 @@ npm run dev
 
 | Date | Change |
 |------|--------|
+| 2025-11-30 | Added 9 new framework and architecture guides |
 | 2025-11-29 | Initial development documentation |
