@@ -2,7 +2,7 @@
 id: "REQ-COMM-002"
 title: "Email Notifications"
 domain: "Communication"
-status: draft
+status: approved
 priority: critical
 created: 2025-11-29
 updated: 2025-11-29

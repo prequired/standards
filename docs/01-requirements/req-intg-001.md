@@ -2,7 +2,7 @@
 id: "REQ-INTG-001"
 title: "Stripe Payment Integration"
 domain: "Integrations"
-status: draft
+status: approved
 priority: critical
 created: 2025-11-29
 updated: 2025-11-29

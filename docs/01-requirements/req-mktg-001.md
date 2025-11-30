@@ -2,7 +2,7 @@
 id: "REQ-MKTG-001"
 title: "Public Homepage"
 domain: "Marketing"
-status: draft
+status: approved
 priority: critical
 created: 2025-11-29
 updated: 2025-11-29

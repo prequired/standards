@@ -1,8 +1,8 @@
 ---
 id: "ADR-0016"
 title: "Error Monitoring & Logging Strategy"
-status: "proposed"
-date: 2025-11-29
+status: "accepted"
+date: "2025-11-29"
 implements_requirement: "REQ-INTG-010, REQ-SEC-005, REQ-PERF-008"
 decision_makers: "Platform Team"
 consulted: "Development Team, DevOps"

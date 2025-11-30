@@ -1,8 +1,8 @@
 ---
 id: "ADR-0017"
 title: "Marketing Site Architecture"
-status: "proposed"
-date: 2025-11-29
+status: "accepted"
+date: "2025-11-29"
 implements_requirement: "REQ-MKTG-001, REQ-MKTG-002, REQ-MKTG-003, REQ-MKTG-004, REQ-MKTG-007, REQ-MKTG-008, REQ-MKTG-009"
 decision_makers: "Platform Team"
 consulted: "Marketing, Design Team"

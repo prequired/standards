@@ -2,7 +2,7 @@
 id: "REQ-SEC-007"
 title: "Data Backup Strategy"
 domain: "Security"
-status: draft
+status: approved
 priority: high
 created: 2025-11-29
 updated: 2025-11-29

@@ -2,7 +2,7 @@
 id: "REQ-ANLY-005"
 title: "Data Exports"
 domain: "Analytics"
-status: draft
+status: approved
 priority: high
 created: 2025-11-29
 updated: 2025-11-29

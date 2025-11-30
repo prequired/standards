@@ -2,7 +2,7 @@
 id: "REQ-PROJ-002"
 title: "Project Status Tracking"
 domain: "Project Management"
-status: draft
+status: approved
 priority: critical
 created: 2025-11-29
 updated: 2025-11-29

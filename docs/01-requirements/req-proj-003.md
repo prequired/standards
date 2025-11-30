@@ -2,7 +2,7 @@
 id: "REQ-PROJ-003"
 title: "Task Management"
 domain: "Project Management"
-status: draft
+status: approved
 priority: high
 created: 2025-11-29
 updated: 2025-11-29

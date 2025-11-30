@@ -2,7 +2,7 @@
 id: "REQ-COMM-001"
 title: "In-App Notifications"
 domain: "Communication"
-status: draft
+status: approved
 priority: high
 created: 2025-11-29
 updated: 2025-11-29

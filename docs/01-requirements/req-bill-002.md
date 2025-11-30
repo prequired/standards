@@ -2,7 +2,7 @@
 id: "REQ-BILL-002"
 title: "Online Payment Processing"
 domain: "Billing"
-status: draft
+status: approved
 priority: critical
 created: 2025-11-29
 updated: 2025-11-29

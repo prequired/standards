@@ -2,7 +2,7 @@
 id: "REQ-AUTH-005"
 title: "Client vs Staff Permission Separation"
 domain: "Authentication"
-status: draft
+status: approved
 priority: critical
 created: 2025-11-29
 updated: 2025-11-29

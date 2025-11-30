@@ -2,7 +2,7 @@
 id: "REQ-AUTH-006"
 title: "Session Management"
 domain: "Authentication"
-status: draft
+status: approved
 priority: high
 created: 2025-11-29
 updated: 2025-11-29

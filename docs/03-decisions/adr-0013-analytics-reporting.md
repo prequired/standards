@@ -1,8 +1,8 @@
 ---
 id: "ADR-0013"
 title: "Analytics & Reporting Strategy"
-status: "proposed"
-date: 2025-11-29
+status: "accepted"
+date: "2025-11-29"
 implements_requirement: "REQ-ANLY-001, REQ-ANLY-002, REQ-ANLY-003, REQ-ANLY-004, REQ-ANLY-005, REQ-ANLY-006, REQ-ANLY-007"
 decision_makers: "Platform Team"
 consulted: "Business, Development Team"

@@ -1,8 +1,8 @@
 ---
 id: "ADR-0012"
 title: "Security & Data Protection Strategy"
-status: "proposed"
-date: 2025-11-29
+status: "accepted"
+date: "2025-11-29"
 implements_requirement: "REQ-SEC-001, REQ-SEC-002, REQ-SEC-003, REQ-SEC-004, REQ-SEC-005, REQ-SEC-006, REQ-SEC-007, REQ-SEC-008"
 decision_makers: "Platform Team"
 consulted: "Security, Legal, Development Team"

@@ -2,7 +2,7 @@
 id: "REQ-CMS-004"
 title: "SEO Metadata Management"
 domain: "Content Management"
-status: draft
+status: approved
 priority: high
 created: 2025-11-29
 updated: 2025-11-29

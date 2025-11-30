@@ -2,7 +2,7 @@
 id: "REQ-PORT-006"
 title: "Feedback Submission"
 domain: "Client Portal"
-status: draft
+status: approved
 priority: high
 created: 2025-11-29
 updated: 2025-11-29

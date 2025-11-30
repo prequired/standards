@@ -2,7 +2,7 @@
 id: "REQ-BILL-001"
 title: "Invoice Generation"
 domain: "Billing"
-status: draft
+status: approved
 priority: critical
 created: 2025-11-29
 updated: 2025-11-29

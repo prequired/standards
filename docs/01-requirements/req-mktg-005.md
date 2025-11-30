@@ -2,7 +2,7 @@
 id: "REQ-MKTG-005"
 title: "Lead Capture Forms"
 domain: "Marketing"
-status: draft
+status: approved
 priority: high
 created: 2025-11-29
 updated: 2025-11-29

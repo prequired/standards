@@ -1,8 +1,8 @@
 ---
 id: "ADR-0011"
 title: "Infrastructure & Hosting Strategy"
-status: "proposed"
-date: 2025-11-29
+status: "accepted"
+date: "2025-11-29"
 implements_requirement: "REQ-PERF-003, REQ-PERF-007, REQ-PERF-008"
 decision_makers: "Platform Team"
 consulted: "DevOps, Development Team"

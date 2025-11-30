@@ -1,8 +1,8 @@
 ---
 id: "ADR-0004"
 title: "Messaging/Chat Solution Selection"
-status: "proposed"
-date: 2025-11-29
+status: "accepted"
+date: "2025-11-29"
 implements_requirement: "REQ-COMM-004"
 decision_makers: "Platform Team"
 consulted: "Development Team, Support Team"

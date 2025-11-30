@@ -2,7 +2,7 @@
 id: "REQ-ANLY-002"
 title: "Revenue Reports"
 domain: "Analytics"
-status: draft
+status: approved
 priority: high
 created: 2025-11-29
 updated: 2025-11-29

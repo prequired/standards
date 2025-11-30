@@ -2,7 +2,7 @@
 id: "REQ-PORT-004"
 title: "Payment from Portal"
 domain: "Client Portal"
-status: draft
+status: approved
 priority: high
 created: 2025-11-29
 updated: 2025-11-29

@@ -1,8 +1,8 @@
 ---
 id: "ADR-0003"
 title: "CMS Approach Selection"
-status: "proposed"
-date: 2025-11-29
+status: "accepted"
+date: "2025-11-29"
 implements_requirement: "REQ-CMS-001, REQ-CMS-008"
 decision_makers: "Platform Team"
 consulted: "Marketing, Development Team"

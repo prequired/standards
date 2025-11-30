@@ -2,7 +2,7 @@
 id: "REQ-INTG-010"
 title: "Error Monitoring Integration"
 domain: "Integrations"
-status: draft
+status: approved
 priority: high
 created: 2025-11-29
 updated: 2025-11-29

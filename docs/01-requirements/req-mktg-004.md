@@ -2,7 +2,7 @@
 id: "REQ-MKTG-004"
 title: "Contact Form"
 domain: "Marketing"
-status: draft
+status: approved
 priority: high
 created: 2025-11-29
 updated: 2025-11-29

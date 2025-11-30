@@ -1,8 +1,8 @@
 ---
 id: "ADR-0019"
 title: "Notification System Architecture"
-status: "proposed"
-date: 2025-11-29
+status: "accepted"
+date: "2025-11-29"
 implements_requirement: "REQ-COMM-001, REQ-COMM-003, REQ-COMM-005, REQ-COMM-006"
 decision_makers: "Platform Team"
 consulted: "Development Team"

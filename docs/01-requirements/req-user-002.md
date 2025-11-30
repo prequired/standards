@@ -2,7 +2,7 @@
 id: "REQ-USER-002"
 title: "Client User Profiles"
 domain: "User Management"
-status: draft
+status: approved
 priority: high
 created: 2025-11-29
 updated: 2025-11-29

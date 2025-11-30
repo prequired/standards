@@ -2,7 +2,7 @@
 id: "REQ-SEC-002"
 title: "HTTPS Enforcement"
 domain: "Security"
-status: draft
+status: approved
 priority: critical
 created: 2025-11-29
 updated: 2025-11-29

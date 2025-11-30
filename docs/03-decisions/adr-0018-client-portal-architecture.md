@@ -1,8 +1,8 @@
 ---
 id: "ADR-0018"
 title: "Client Portal Architecture"
-status: "proposed"
-date: 2025-11-29
+status: "accepted"
+date: "2025-11-29"
 implements_requirement: "REQ-PORT-001, REQ-PORT-002, REQ-PORT-003, REQ-PORT-004, REQ-PORT-005, REQ-PORT-006, REQ-PORT-008, REQ-PORT-009"
 decision_makers: "Platform Team"
 consulted: "Development Team, Client Success"

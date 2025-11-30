@@ -2,7 +2,7 @@
 id: "REQ-PERF-003"
 title: "99.9% Uptime"
 domain: "Performance"
-status: draft
+status: approved
 priority: high
 created: 2025-11-29
 updated: 2025-11-29

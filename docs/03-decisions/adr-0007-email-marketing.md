@@ -1,8 +1,8 @@
 ---
 id: "ADR-0007"
 title: "Email Marketing Platform Selection"
-status: "proposed"
-date: 2025-11-29
+status: "accepted"
+date: "2025-11-29"
 implements_requirement: "REQ-MKTG-005, REQ-MKTG-006"
 decision_makers: "Platform Team"
 consulted: "Marketing Team"

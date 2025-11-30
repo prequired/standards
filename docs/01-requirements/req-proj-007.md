@@ -2,7 +2,7 @@
 id: "REQ-PROJ-007"
 title: "File Attachments per Project"
 domain: "Project Management"
-status: draft
+status: approved
 priority: high
 created: 2025-11-29
 updated: 2025-11-29

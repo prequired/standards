@@ -2,7 +2,7 @@
 id: "REQ-PERF-001"
 title: "Page Load Under 3 Seconds"
 domain: "Performance"
-status: draft
+status: approved
 priority: high
 created: 2025-11-29
 updated: 2025-11-29

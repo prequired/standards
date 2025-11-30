@@ -2,7 +2,7 @@
 id: "REQ-SEC-001"
 title: "Data Encryption at Rest"
 domain: "Security"
-status: draft
+status: approved
 priority: critical
 created: 2025-11-29
 updated: 2025-11-29

@@ -1,8 +1,8 @@
 ---
 id: "ADR-0002"
 title: "Invoicing Solution Selection"
-status: "proposed"
-date: 2025-11-29
+status: "accepted"
+date: "2025-11-29"
 implements_requirement: "REQ-BILL-001, REQ-BILL-004"
 decision_makers: "Platform Team"
 consulted: "Finance, Development Team"

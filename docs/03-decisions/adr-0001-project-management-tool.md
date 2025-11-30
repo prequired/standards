@@ -1,8 +1,8 @@
 ---
 id: "ADR-0001"
 title: "Project Management Tool Selection"
-status: "proposed"
-date: 2025-11-29
+status: "accepted"
+date: "2025-11-29"
 implements_requirement: "REQ-PROJ-001, REQ-PROJ-003, REQ-PROJ-005"
 decision_makers: "Platform Team"
 consulted: "Development Team, Operations"

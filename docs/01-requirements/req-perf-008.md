@@ -2,7 +2,7 @@
 id: "REQ-PERF-008"
 title: "Application Monitoring and Alerting"
 domain: "Performance"
-status: draft
+status: approved
 priority: high
 created: 2025-11-29
 updated: 2025-11-29

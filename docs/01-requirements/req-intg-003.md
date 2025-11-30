@@ -2,7 +2,7 @@
 id: "REQ-INTG-003"
 title: "Cloud Storage (S3)"
 domain: "Integrations"
-status: draft
+status: approved
 priority: high
 created: 2025-11-29
 updated: 2025-11-29

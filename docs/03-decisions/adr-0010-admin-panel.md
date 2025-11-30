@@ -1,8 +1,8 @@
 ---
 id: "ADR-0010"
 title: "Admin Panel Framework Selection"
-status: "proposed"
-date: 2025-11-29
+status: "accepted"
+date: "2025-11-29"
 implements_requirement: "Multiple (AUTH, USER, PROJ, BILL, CMS)"
 decision_makers: "Platform Team"
 consulted: "Development Team"

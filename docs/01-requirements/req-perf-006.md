@@ -2,7 +2,7 @@
 id: "REQ-PERF-006"
 title: "Caching Strategy"
 domain: "Performance"
-status: draft
+status: approved
 priority: high
 created: 2025-11-29
 updated: 2025-11-29

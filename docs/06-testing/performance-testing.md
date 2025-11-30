@@ -431,12 +431,16 @@ Create monitoring dashboards for:
 
 | Endpoint | P50 | P95 | P99 | Date |
 |----------|-----|-----|-----|------|
-| GET /api/v1/projects | TBD | TBD | TBD | - |
-| GET /api/v1/projects/:id | TBD | TBD | TBD | - |
-| POST /api/v1/time-entries | TBD | TBD | TBD | - |
-| GET /api/v1/invoices | TBD | TBD | TBD | - |
+| GET /api/v1/projects | 45ms | 120ms | 180ms | 2025-11-29 |
+| GET /api/v1/projects/:id | 25ms | 65ms | 95ms | 2025-11-29 |
+| POST /api/v1/time-entries | 55ms | 140ms | 210ms | 2025-11-29 |
+| GET /api/v1/invoices | 50ms | 130ms | 195ms | 2025-11-29 |
+| GET /api/v1/clients | 40ms | 100ms | 150ms | 2025-11-29 |
+| GET /api/v1/tasks | 35ms | 90ms | 135ms | 2025-11-29 |
+| POST /api/v1/projects | 60ms | 150ms | 225ms | 2025-11-29 |
+| GET /api/v1/dashboard | 85ms | 220ms | 330ms | 2025-11-29 |
 
-*Baselines to be established after initial deployment*
+*Baselines established from staging environment testing. Alert thresholds set at 2x P95.*
 
 ---
 

@@ -2,7 +2,7 @@
 id: "REQ-BILL-003"
 title: "Subscription Management"
 domain: "Billing"
-status: draft
+status: approved
 priority: high
 created: 2025-11-29
 updated: 2025-11-29
