@@ -26,6 +26,8 @@ This repository implements a "Docs-as-Code" approach to technical documentation,
 | **Requirements** | [Volere Specification](https://www.volere.org/) | Structured requirement capture with fit criteria |
 | **Architecture** | [arc42](https://arc42.org/) | 12-section architecture documentation framework |
 | **Decisions** | [MADR](https://adr.github.io/madr/) | Markdown Architectural Decision Records |
+| **Git Workflow** | [Conventional Commits](https://www.conventionalcommits.org/) | Standardized commit messages and branching |
+| **Versioning** | [Semantic Versioning](https://semver.org/) | MAJOR.MINOR.PATCH release numbering |
 | **API Design** | [Zalando RESTful API Guidelines](https://opensource.zalando.com/restful-api-guidelines/) | Rule #100: API First principle |
 | **Diagrams** | [C4 Model](https://c4model.com/) | Context, Container, Component, Code diagrams |
 | **Quality** | [Google Developer Documentation Style Guide](https://developers.google.com/style) | Writing standards enforced via Vale |
@@ -48,11 +50,17 @@ This repository implements a "Docs-as-Code" approach to technical documentation,
 ├── docs/
 │   ├── 00-governance/         # SOPs and process documentation
 │   │   ├── sop-000-master.md       # Golden Thread traceability
+│   │   ├── sop-001-git-standards.md # Git workflow and conventions
 │   │   └── sop-004-api-guidelines.md # API First enforcement
 │   ├── 01-requirements/       # Volere requirement specifications
 │   ├── 02-architecture/       # arc42 architecture documents
 │   ├── 03-decisions/          # Architectural Decision Records
-│   └── 05-api/                # OpenAPI specifications
+│   ├── 04-development/        # Development guides, coding standards
+│   ├── 05-api/                # OpenAPI specifications
+│   ├── 06-testing/            # Test strategies, QA documentation
+│   ├── 07-operations/         # Runbooks, deployment, monitoring
+│   ├── 08-security/           # Security policies, threat models
+│   └── 09-releases/           # Release notes, changelogs
 └── templates/                 # Copy-paste templates
     ├── req-volere.md          # Requirement template
     ├── adr-madr.md            # ADR template
@@ -127,7 +135,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 
 ### Quick Reference
 
-1. **Read the Standards:** [SOP-000](docs/00-governance/sop-000-master.md), [SOP-004](docs/00-governance/sop-004-api-guidelines.md)
+1. **Read the Standards:** [SOP-000](docs/00-governance/sop-000-master.md), [SOP-001](docs/00-governance/sop-001-git-standards.md), [SOP-004](docs/00-governance/sop-004-api-guidelines.md)
 2. **Use the Templates:** `templates/*.md`
 3. **Follow Naming Conventions:**
    - Requirements: `req-{domain}-{seq}.md`
@@ -251,6 +259,7 @@ Each document specifies an `owner` in YAML frontmatter. Owners:
 
 ### Internal Documentation
 - [SOP-000: Golden Thread](docs/00-governance/sop-000-master.md)
+- [SOP-001: Git Standards](docs/00-governance/sop-001-git-standards.md)
 - [SOP-004: API Guidelines](docs/00-governance/sop-004-api-guidelines.md)
 - [AI Context](.github/AI_CONTEXT.md)
 - [Contributing Guide](CONTRIBUTING.md)

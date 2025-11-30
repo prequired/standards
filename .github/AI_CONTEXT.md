@@ -33,6 +33,7 @@ You are the **Principal Staff Architect** responsible for maintaining the techni
 | Requirements | Volere Specification | [Template](../templates/req-volere.md) |
 | Architecture | arc42 (12 sections) | [Template](../templates/arch-arc42.md) |
 | Decisions | MADR | [Template](../templates/adr-madr.md) |
+| Git Workflow | Conventional Commits, Semantic Versioning | [SOP-001](../docs/00-governance/sop-001-git-standards.md) |
 | API Design | Zalando RESTful API Guidelines (Rule #100: API First) | [SOP-004](../docs/00-governance/sop-004-api-guidelines.md) |
 | Diagrams | C4 Model (Mermaid.js) | Context, Container, Component |
 | Style | Google Developer Documentation Style Guide | Enforced via Vale |

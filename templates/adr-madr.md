@@ -1,14 +1,14 @@
 ---
-id: ADR-{SEQUENCE}
-title: {Decision title (e.g., "Selection of Message Queue Technology")}
-status: {proposed | accepted | rejected | deprecated | superseded}
+id: "ADR-{SEQUENCE}"
+title: "{Decision title (e.g., Selection of Message Queue Technology)}"
+status: "{proposed | accepted | rejected | deprecated | superseded}"
 date: YYYY-MM-DD
-implements_requirement: REQ-{DOMAIN}-{SEQUENCE}
-decision_makers: {Names or roles}
-consulted: {Names or teams consulted}
-informed: {Stakeholders notified}
-supersedes: {ADR-XXXX (if applicable)}
-superseded_by: {ADR-YYYY (if applicable)}
+implements_requirement: "REQ-{DOMAIN}-{SEQUENCE}"
+decision_makers: "{Names or roles}"
+consulted: "{Names or teams consulted}"
+informed: "{Stakeholders notified}"
+supersedes: "{ADR-XXXX (if applicable)}"
+superseded_by: "{ADR-YYYY (if applicable)}"
 ---
 
 # ADR-{SEQUENCE}: {Decision Title}

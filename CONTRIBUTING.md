@@ -162,15 +162,20 @@ The system authenticates administrative users...
 
 ## Pull Request Process
 
-1. **Title format:** `docs: Add REQ-AUTH-101 for MFA requirement`
-2. **Description:** Include traceability matrix
-3. **Checks:** Ensure GitHub Actions pass
-4. **Review:** Request review from document owner
-5. **Merge:** Squash and merge after approval
+Follow [SOP-001: Git Standards](docs/00-governance/sop-001-git-standards.md) for complete workflow details.
+
+1. **Branch naming:** `docs/{short-description}` or `feature/{ticket-id}-{description}`
+2. **Commit format:** Follow [Conventional Commits](https://www.conventionalcommits.org/)
+3. **Title format:** `docs: add REQ-AUTH-101 for MFA requirement`
+4. **Description:** Include traceability matrix
+5. **Checks:** Ensure GitHub Actions pass
+6. **Review:** Request review from document owner
+7. **Merge:** Squash and merge after approval
 
 ## Questions?
 
 - Read [SOP-000](docs/00-governance/sop-000-master.md) for traceability
+- Read [SOP-001](docs/00-governance/sop-001-git-standards.md) for Git workflow
 - Check [SOP-004](docs/00-governance/sop-004-api-guidelines.md) for API guidelines
 - Review [AI_CONTEXT.md](.github/AI_CONTEXT.md) for decision trees
 - Contact: CTO Office or Architecture Guild

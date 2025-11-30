@@ -84,7 +84,12 @@
 - [x] `docs/01-requirements/` - Requirements (with .gitkeep)
 - [x] `docs/02-architecture/` - Architecture (with .gitkeep)
 - [x] `docs/03-decisions/` - ADRs (with .gitkeep)
+- [x] `docs/04-development/` - Development guides (with .gitkeep)
 - [x] `docs/05-api/` - OpenAPI specs (with .gitkeep)
+- [x] `docs/06-testing/` - Test strategies (with .gitkeep)
+- [x] `docs/07-operations/` - Runbooks (with .gitkeep)
+- [x] `docs/08-security/` - Security docs (with .gitkeep)
+- [x] `docs/09-releases/` - Release notes (with .gitkeep)
 - [x] `templates/` - Copy-paste templates
 
 ---

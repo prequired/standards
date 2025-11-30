@@ -144,6 +144,7 @@ Pull requests modifying documentation must include a traceability matrix (manual
 
 ## References
 
+- [SOP-001: Git Standards](./sop-001-git-standards.md)
 - [SOP-004: API Guidelines](./sop-004-api-guidelines.md)
 - [Volere Template](../../templates/req-volere.md)
 - [MADR Template](../../templates/adr-madr.md)

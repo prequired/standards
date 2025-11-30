@@ -1,12 +1,12 @@
 ---
-id: REQ-{DOMAIN}-{SEQUENCE}
-title: {Brief requirement title}
-domain: {Business domain (e.g., Authentication, Data, Payments)}
+id: "REQ-{DOMAIN}-{SEQUENCE}"
+title: "{Brief requirement title}"
+domain: "{Business domain (e.g., Authentication, Data, Payments)}"
 status: draft
-priority: {critical | high | medium | low}
+priority: "{critical | high | medium | low}"
 created: YYYY-MM-DD
 updated: YYYY-MM-DD
-author: {Name or Team}
+author: "{Name or Team}"
 ---
 
 # REQ-{DOMAIN}-{SEQUENCE}: {Requirement Title}
