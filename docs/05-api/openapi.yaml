@@ -1148,7 +1148,7 @@ components:
               properties:
                 number:
                   type: string
-                  example: INV-2025-0001
+                  example: "INV-2025-0001"
                 status:
                   type: string
                   enum: [draft, sent, paid, overdue, cancelled]

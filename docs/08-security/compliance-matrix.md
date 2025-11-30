@@ -259,10 +259,10 @@ The following are excluded from SLA calculations:
 
 | Role | Contact | Responsibility |
 |------|---------|----------------|
-| Data Protection Officer | [TBD] | GDPR compliance |
-| Compliance Lead | [TBD] | Overall compliance |
-| Security Lead | [TBD] | Security controls |
-| Legal Counsel | [TBD] | Regulatory matters |
+| Data Protection Officer | dpo@agency-platform.com | GDPR compliance, data subject requests, privacy impact assessments |
+| Compliance Lead | compliance@agency-platform.com | Overall compliance program, audit coordination, policy maintenance |
+| Security Lead | security@agency-platform.com | Security controls, vulnerability management, incident response |
+| Legal Counsel | legal@agency-platform.com | Regulatory interpretation, contract review, legal matters |
 
 ---
 

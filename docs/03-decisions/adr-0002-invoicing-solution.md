@@ -40,6 +40,64 @@ The platform must generate invoices that integrate with time tracking, project d
 
 **Chosen Option:** Option E - Laravel Cashier + Custom Invoice Templates
 
+### Invoice Flow Architecture
+
+```mermaid
+flowchart LR
+    subgraph Platform["Agency Platform"]
+        TE[Time Entries]
+        P[Projects]
+        I[Invoice Model]
+        PDF[PDF Generator]
+    end
+
+    subgraph Stripe["Stripe"]
+        PI[Payment Intent]
+        WH[Webhooks]
+        PM[Payment Methods]
+    end
+
+    subgraph Client["Client Portal"]
+        View[Invoice View]
+        Pay[Pay Button]
+        DL[Download PDF]
+    end
+
+    TE --> I
+    P --> I
+    I --> PDF
+    I --> View
+    View --> Pay
+    Pay --> PI
+    PI --> PM
+    PM --> WH
+    WH --> I
+    PDF --> DL
+```
+
+### Invoice Generation Sequence
+
+```mermaid
+sequenceDiagram
+    participant Staff
+    participant Platform
+    participant DB
+    participant Stripe
+    participant Client
+
+    Staff->>Platform: Create Invoice
+    Platform->>DB: Fetch Time Entries
+    Platform->>DB: Fetch Project Data
+    Platform->>DB: Save Invoice + Items
+    Platform->>Platform: Generate PDF
+    Platform->>Client: Send Invoice Email
+    Client->>Platform: View Invoice
+    Client->>Stripe: Pay Invoice
+    Stripe->>Platform: Webhook: payment.succeeded
+    Platform->>DB: Mark Invoice Paid
+    Platform->>Staff: Notify Payment Received
+```
+
 **Justification:** Laravel Cashier already provides Stripe integration for subscriptions and one-time payments. By extending Cashier with custom invoice templates (using DomPDF or Browsershot), we get:
 - Native Stripe payment integration (already required by REQ-INTG-001)
 - Full control over invoice design and branding

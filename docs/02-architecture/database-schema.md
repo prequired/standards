@@ -24,64 +24,105 @@ Complete database schema for the Agency Platform.
 
 ## Entity Relationship Diagram
 
-```
-┌──────────────┐       ┌──────────────┐       ┌──────────────┐
-│    users     │       │   clients    │       │   projects   │
-├──────────────┤       ├──────────────┤       ├──────────────┤
-│ id           │──┐    │ id           │──┐    │ id           │
-│ name         │  │    │ name         │  │    │ name         │
-│ email        │  │    │ email        │  │    │ client_id    │──┐
-│ password     │  │    │ company      │  │    │ status       │  │
-│ role         │  │    │ phone        │  └───▶│ budget_cents │  │
-│ is_active    │  │    │ address      │       │ due_date     │  │
-│ created_at   │  │    │ created_at   │       │ created_at   │  │
-│ updated_at   │  │    │ updated_at   │       │ updated_at   │  │
-│ deleted_at   │  │    │ deleted_at   │       │ deleted_at   │  │
-└──────────────┘  │    └──────────────┘       └──────────────┘  │
-                  │                                  │           │
-                  │    ┌──────────────┐              │           │
-                  │    │    tasks     │◀─────────────┘           │
-                  │    ├──────────────┤                          │
-                  │    │ id           │                          │
-                  │    │ project_id   │──────────────────────────┘
-                  │    │ title        │
-                  └───▶│ assignee_id  │
-                       │ status       │
-                       │ due_date     │
-                       │ created_at   │
-                       └──────────────┘
-                              │
-                              ▼
-                  ┌──────────────────┐
-                  │  time_entries    │
-                  ├──────────────────┤
-                  │ id               │
-                  │ user_id          │──▶ users
-                  │ project_id       │──▶ projects
-                  │ task_id          │──▶ tasks
-                  │ duration_minutes │
-                  │ description      │
-                  │ date             │
-                  │ billable         │
-                  │ created_at       │
-                  └──────────────────┘
+```mermaid
+erDiagram
+    users ||--o{ tasks : "assigned to"
+    users ||--o{ time_entries : "logs"
+    clients ||--o{ projects : "owns"
+    clients ||--o{ invoices : "receives"
+    projects ||--o{ tasks : "contains"
+    projects ||--o{ time_entries : "tracks"
+    projects ||--o| invoices : "billed via"
+    tasks ||--o{ time_entries : "tracked in"
+    invoices ||--|{ invoice_items : "contains"
 
-┌──────────────┐       ┌──────────────────┐
-│   invoices   │       │  invoice_items   │
-├──────────────┤       ├──────────────────┤
-│ id           │◀──────│ invoice_id       │
-│ client_id    │──▶    │ description      │
-│ project_id   │──▶    │ quantity         │
-│ number       │       │ unit_price_cents │
-│ status       │       │ total_cents      │
-│ subtotal     │       │ created_at       │
-│ tax_cents    │       └──────────────────┘
-│ total_cents  │
-│ due_date     │
-│ sent_at      │
-│ paid_at      │
-│ created_at   │
-└──────────────┘
+    users {
+        bigint id PK
+        varchar name
+        varchar email UK
+        varchar password
+        enum role
+        boolean is_active
+        timestamp created_at
+        timestamp deleted_at
+    }
+
+    clients {
+        bigint id PK
+        varchar name
+        varchar email UK
+        varchar company
+        varchar phone
+        text address
+        int payment_terms_days
+        timestamp created_at
+        timestamp deleted_at
+    }
+
+    projects {
+        bigint id PK
+        bigint client_id FK
+        varchar name
+        text description
+        enum status
+        bigint budget_cents
+        int hourly_rate_cents
+        date due_date
+        timestamp created_at
+        timestamp deleted_at
+    }
+
+    tasks {
+        bigint id PK
+        bigint project_id FK
+        bigint assignee_id FK
+        varchar title
+        text description
+        enum status
+        enum priority
+        date due_date
+        timestamp completed_at
+        timestamp created_at
+    }
+
+    time_entries {
+        bigint id PK
+        bigint user_id FK
+        bigint project_id FK
+        bigint task_id FK
+        int duration_minutes
+        text description
+        date date
+        boolean billable
+        boolean billed
+        timestamp created_at
+    }
+
+    invoices {
+        bigint id PK
+        bigint client_id FK
+        bigint project_id FK
+        varchar number UK
+        enum status
+        bigint subtotal_cents
+        bigint tax_cents
+        bigint total_cents
+        date due_date
+        timestamp sent_at
+        timestamp paid_at
+        timestamp created_at
+    }
+
+    invoice_items {
+        bigint id PK
+        bigint invoice_id FK
+        varchar description
+        decimal quantity
+        int unit_price_cents
+        int total_cents
+        int position
+        timestamp created_at
+    }
 ```
 
 ---

@@ -57,9 +57,36 @@ The performance strategy involves decisions across multiple layers:
 
 **Chosen Option:** Option D - Multi-layer caching (Redis + HTTP caching)
 
-```
-Request Flow:
-[Browser Cache] → [CDN/Spaces] → [Nginx Cache] → [Laravel Response Cache] → [Redis] → [Database]
+```mermaid
+flowchart LR
+    subgraph Client
+        Browser[Browser Cache]
+    end
+
+    subgraph Edge
+        CDN[CDN / Spaces]
+        Nginx[Nginx Cache]
+    end
+
+    subgraph Application
+        RC[Response Cache]
+        Redis[(Redis)]
+    end
+
+    subgraph Data
+        DB[(MySQL)]
+    end
+
+    Browser -->|Miss| CDN
+    CDN -->|Miss| Nginx
+    Nginx -->|Miss| RC
+    RC -->|Miss| Redis
+    Redis -->|Miss| DB
+    DB -->|Result| Redis
+    Redis -->|Result| RC
+    RC -->|Result| Nginx
+    Nginx -->|Result| CDN
+    CDN -->|Result| Browser
 ```
 
 ### Frontend Optimization

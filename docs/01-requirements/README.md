@@ -362,3 +362,14 @@ For a minimum viable product, focus on **Critical** requirements (18 total):
 **Security:** SEC-001, SEC-002, SEC-003
 
 This gives you: authentication, basic project tracking, invoicing with payments, client dashboard, and a homepage.
+
+---
+
+## Requirement Status Explanation
+
+| Status | Count | Meaning |
+|--------|-------|---------|
+| **approved** | 57 | Core requirements validated for implementation (Critical/High priority) |
+| **draft** | 44 | Future backlog requirements (Medium/Low priority) - intentionally kept as draft for future phases |
+
+**Note:** The 44 draft requirements represent planned future enhancements and are intentionally not approved for MVP/Phase 1. They provide a roadmap for platform evolution but should not be implemented until core functionality is stable.

@@ -46,6 +46,72 @@ For each security domain, multiple approaches were considered. This ADR document
 
 ## Decision Outcome
 
+### Security Architecture Overview
+
+```mermaid
+flowchart TB
+    subgraph Client["Client Layer"]
+        Browser[Web Browser]
+        Mobile[Mobile App]
+    end
+
+    subgraph Edge["Edge Security"]
+        CF[Cloudflare DDoS]
+        HTTPS[TLS 1.3]
+    end
+
+    subgraph App["Application Security"]
+        CSRF[CSRF Middleware]
+        Auth[Sanctum Auth]
+        Rate[Rate Limiter]
+        Audit[Activity Log]
+    end
+
+    subgraph Data["Data Security"]
+        Encrypt[AES-256 Encryption]
+        DB[(MySQL - Encrypted)]
+        Files[S3 Signed URLs]
+        Backup[Encrypted Backups]
+    end
+
+    Browser --> CF
+    Mobile --> CF
+    CF --> HTTPS
+    HTTPS --> CSRF
+    CSRF --> Auth
+    Auth --> Rate
+    Rate --> Audit
+    Audit --> Encrypt
+    Encrypt --> DB
+    Encrypt --> Files
+    DB --> Backup
+    Files --> Backup
+```
+
+### Data Flow Security
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant Nginx
+    participant Laravel
+    participant Database
+    participant Spaces
+
+    User->>Nginx: HTTPS Request
+    Note over Nginx: TLS 1.3 + HSTS
+    Nginx->>Laravel: Forward Request
+    Note over Laravel: CSRF + Rate Limit Check
+    Laravel->>Laravel: Sanctum Auth
+    Laravel->>Database: Encrypted Query
+    Note over Database: Data at Rest Encryption
+    Database-->>Laravel: Encrypted Response
+    Laravel->>Spaces: Generate Signed URL
+    Note over Spaces: 60min Expiry
+    Laravel-->>Nginx: Response
+    Nginx-->>User: HTTPS Response
+```
+
 ### Encryption Strategy
 
 **Decision:** Laravel Encryption + Database-Level Encryption

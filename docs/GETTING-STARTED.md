@@ -1,3 +1,11 @@
+---
+id: "DOC-ONBOARD-001"
+title: "Getting Started Guide"
+status: "active"
+owner: "Documentation Team"
+last_updated: "2025-11-30"
+---
+
 # Getting Started with Agency Platform Documentation
 
 **Welcome to the Agency Platform Docs-as-Code Framework**

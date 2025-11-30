@@ -345,15 +345,16 @@ After resolution:
 ```markdown
 # Post-Mortem: [Incident Title]
 
-**Date:** YYYY-MM-DD
-**Duration:** X hours Y minutes
-**Severity:** SEV-X
-**Author:** [Name]
+**Date:** [FILL: Today's date in YYYY-MM-DD format]
+**Duration:** [FILL: Total incident duration]
+**Severity:** [FILL: SEV-1, SEV-2, SEV-3, or SEV-4]
+**Author:** [FILL: Post-mortem author name]
 
 ## Summary
-Brief description of what happened.
+[FILL: Brief 2-3 sentence description of what happened]
 
 ## Timeline
+[FILL: Add entries for each significant event]
 - HH:MM - First alert received
 - HH:MM - Incident declared
 - HH:MM - Root cause identified
@@ -361,29 +362,31 @@ Brief description of what happened.
 - HH:MM - Incident resolved
 
 ## Root Cause
-What actually caused the incident.
+[FILL: Detailed explanation of the root cause]
 
 ## Impact
-- Users affected: X
-- Revenue impact: $X
-- Data loss: None/Description
+- Users affected: [FILL: Number or percentage]
+- Revenue impact: [FILL: Estimated dollar amount or "None"]
+- Data loss: [FILL: None, or describe data affected]
 
 ## What Went Well
+[FILL: List 2-3 things that worked during response]
 - Quick detection
 - Effective communication
 
 ## What Went Wrong
+[FILL: List 2-3 areas for improvement]
 - Delayed escalation
 - Missing monitoring
 
 ## Action Items
 | Action | Owner | Due Date |
 |--------|-------|----------|
-| Add monitoring for X | @name | YYYY-MM-DD |
-| Update runbook for Y | @name | YYYY-MM-DD |
+| [FILL: Specific action] | [FILL: @username] | [FILL: Due date] |
+| [FILL: Specific action] | [FILL: @username] | [FILL: Due date] |
 
 ## Lessons Learned
-Key takeaways for preventing similar incidents.
+[FILL: Key takeaways for preventing similar incidents]
 ```
 
 ---
