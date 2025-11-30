@@ -15,6 +15,8 @@ This directory contains development standards, workflows, and guidelines for the
 | [dev-standards.md](./dev-standards.md) | PHP/Laravel coding conventions | All developers |
 | [git-workflow.md](./git-workflow.md) | Git branching and commit guidelines | All developers |
 | [code-review.md](./code-review.md) | PR process and review guidelines | All developers |
+| [setup-guide.md](./setup-guide.md) | Local development environment setup | New developers |
+| [configuration-management.md](./configuration-management.md) | Environment and secrets management | All developers |
 
 ## Quick Reference
 

@@ -12,7 +12,10 @@ This directory contains testing strategy, test plans, and quality assurance docu
 
 | Document | Description |
 |----------|-------------|
-| [testing-strategy.md](./testing-strategy.md) | Comprehensive testing approach, examples, and coverage requirements |
+| [testing-strategy.md](./testing-strategy.md) | Comprehensive testing approach and coverage requirements |
+| [test-templates.md](./test-templates.md) | Unit, feature, and integration test templates |
+| [e2e-scenarios.md](./e2e-scenarios.md) | End-to-end test scenarios for critical user journeys |
+| [performance-testing.md](./performance-testing.md) | Load testing, benchmarks, and performance targets |
 
 ## Quick Reference
 

@@ -1,0 +1,1042 @@
+{
+  "info": {
+    "_postman_id": "agency-platform-api-v1",
+    "name": "Agency Platform API",
+    "description": "REST API for the Agency Platform - manage projects, clients, invoices, and time tracking.\n\n## Authentication\nAll endpoints require Bearer token authentication via Laravel Sanctum.\n\n## Getting Started\n1. Use the 'Obtain Access Token' request to get your bearer token\n2. The token will be automatically set in the collection variables\n3. All subsequent requests will use this token",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.agency-platform.com/v1",
+      "type": "string"
+    },
+    {
+      "key": "bearerToken",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Obtain Access Token",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "if (jsonData.token) {",
+                  "    pm.collectionVariables.set('bearerToken', jsonData.token);",
+                  "    pm.test('Token saved to collection variables', function() {",
+                  "        pm.expect(pm.collectionVariables.get('bearerToken')).to.not.be.empty;",
+                  "    });",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\": \"user@example.com\",\n    \"password\": \"your-password\",\n    \"device_name\": \"postman-client\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/token",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "token"]
+            },
+            "description": "Obtain an access token for API authentication. The token will be automatically saved to the collection variables."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Authenticated User",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/auth/user",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "user"]
+            },
+            "description": "Get the currently authenticated user's details."
+          },
+          "response": []
+        },
+        {
+          "name": "Revoke Token",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/auth/token",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "token"]
+            },
+            "description": "Revoke the current access token."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Projects",
+      "item": [
+        {
+          "name": "List Projects",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/projects?page=1&per_page=15",
+              "host": ["{{baseUrl}}"],
+              "path": ["projects"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "per_page",
+                  "value": "15"
+                },
+                {
+                  "key": "status",
+                  "value": "active",
+                  "disabled": true
+                },
+                {
+                  "key": "client_id",
+                  "value": "1",
+                  "disabled": true
+                },
+                {
+                  "key": "include",
+                  "value": "client,tasks",
+                  "disabled": true
+                },
+                {
+                  "key": "sort",
+                  "value": "-created_at",
+                  "disabled": true
+                }
+              ]
+            },
+            "description": "List all projects with optional filtering and pagination."
+          },
+          "response": []
+        },
+        {
+          "name": "Create Project",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Website Redesign\",\n    \"client_id\": 1,\n    \"description\": \"Complete website redesign with new branding\",\n    \"status\": \"active\",\n    \"budget_cents\": 1000000,\n    \"due_date\": \"2025-03-31\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/projects",
+              "host": ["{{baseUrl}}"],
+              "path": ["projects"]
+            },
+            "description": "Create a new project."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Project",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/projects/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["projects", "1"]
+            },
+            "description": "Get a specific project by ID."
+          },
+          "response": []
+        },
+        {
+          "name": "Update Project",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Website Redesign - Phase 2\",\n    \"status\": \"active\",\n    \"budget_cents\": 1500000\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/projects/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["projects", "1"]
+            },
+            "description": "Update an existing project."
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Project",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/projects/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["projects", "1"]
+            },
+            "description": "Delete a project."
+          },
+          "response": []
+        },
+        {
+          "name": "List Project Tasks",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/projects/1/tasks",
+              "host": ["{{baseUrl}}"],
+              "path": ["projects", "1", "tasks"]
+            },
+            "description": "List all tasks for a specific project."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Clients",
+      "item": [
+        {
+          "name": "List Clients",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/clients?page=1&per_page=15",
+              "host": ["{{baseUrl}}"],
+              "path": ["clients"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "per_page",
+                  "value": "15"
+                }
+              ]
+            },
+            "description": "List all clients with pagination."
+          },
+          "response": []
+        },
+        {
+          "name": "Create Client",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Acme Corporation\",\n    \"email\": \"contact@acme.com\",\n    \"company\": \"Acme Corp\",\n    \"phone\": \"+1-555-123-4567\",\n    \"address\": \"123 Main Street, New York, NY 10001\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/clients",
+              "host": ["{{baseUrl}}"],
+              "path": ["clients"]
+            },
+            "description": "Create a new client."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Client",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/clients/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["clients", "1"]
+            },
+            "description": "Get a specific client by ID."
+          },
+          "response": []
+        },
+        {
+          "name": "Update Client",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Acme Corporation Inc.\",\n    \"email\": \"billing@acme.com\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/clients/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["clients", "1"]
+            },
+            "description": "Update an existing client."
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Client",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/clients/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["clients", "1"]
+            },
+            "description": "Delete a client."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Tasks",
+      "item": [
+        {
+          "name": "List Tasks",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/tasks?page=1&per_page=15",
+              "host": ["{{baseUrl}}"],
+              "path": ["tasks"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "per_page",
+                  "value": "15"
+                },
+                {
+                  "key": "project_id",
+                  "value": "1",
+                  "disabled": true
+                },
+                {
+                  "key": "status",
+                  "value": "in_progress",
+                  "disabled": true
+                },
+                {
+                  "key": "assignee_id",
+                  "value": "1",
+                  "disabled": true
+                }
+              ]
+            },
+            "description": "List all tasks with optional filtering."
+          },
+          "response": []
+        },
+        {
+          "name": "Create Task",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\": \"Design homepage mockup\",\n    \"project_id\": 1,\n    \"description\": \"Create initial homepage design mockup in Figma\",\n    \"assignee_id\": 1,\n    \"status\": \"pending\",\n    \"due_date\": \"2025-02-15\",\n    \"estimated_hours\": 8\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/tasks",
+              "host": ["{{baseUrl}}"],
+              "path": ["tasks"]
+            },
+            "description": "Create a new task."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Task",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/tasks/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["tasks", "1"]
+            },
+            "description": "Get a specific task by ID."
+          },
+          "response": []
+        },
+        {
+          "name": "Update Task",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\": \"Design homepage mockup - Revised\",\n    \"status\": \"in_progress\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/tasks/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["tasks", "1"]
+            },
+            "description": "Update an existing task."
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Task",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/tasks/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["tasks", "1"]
+            },
+            "description": "Delete a task."
+          },
+          "response": []
+        },
+        {
+          "name": "Mark Task Complete",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/tasks/1/complete",
+              "host": ["{{baseUrl}}"],
+              "path": ["tasks", "1", "complete"]
+            },
+            "description": "Mark a task as complete."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Time Entries",
+      "item": [
+        {
+          "name": "List Time Entries",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/time-entries?page=1&per_page=15",
+              "host": ["{{baseUrl}}"],
+              "path": ["time-entries"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "per_page",
+                  "value": "15"
+                },
+                {
+                  "key": "project_id",
+                  "value": "1",
+                  "disabled": true
+                },
+                {
+                  "key": "task_id",
+                  "value": "1",
+                  "disabled": true
+                },
+                {
+                  "key": "user_id",
+                  "value": "1",
+                  "disabled": true
+                },
+                {
+                  "key": "from",
+                  "value": "2025-01-01",
+                  "disabled": true
+                },
+                {
+                  "key": "to",
+                  "value": "2025-01-31",
+                  "disabled": true
+                }
+              ]
+            },
+            "description": "List all time entries with optional filtering."
+          },
+          "response": []
+        },
+        {
+          "name": "Create Time Entry",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"project_id\": 1,\n    \"task_id\": 1,\n    \"description\": \"Worked on homepage design\",\n    \"duration_minutes\": 120,\n    \"date\": \"2025-01-15\",\n    \"billable\": true\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/time-entries",
+              "host": ["{{baseUrl}}"],
+              "path": ["time-entries"]
+            },
+            "description": "Create a manual time entry."
+          },
+          "response": []
+        },
+        {
+          "name": "Start Timer",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"project_id\": 1,\n    \"task_id\": 1,\n    \"description\": \"Working on homepage design\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/time-entries/start",
+              "host": ["{{baseUrl}}"],
+              "path": ["time-entries", "start"]
+            },
+            "description": "Start a new timer for time tracking."
+          },
+          "response": []
+        },
+        {
+          "name": "Stop Timer",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/time-entries/1/stop",
+              "host": ["{{baseUrl}}"],
+              "path": ["time-entries", "1", "stop"]
+            },
+            "description": "Stop a running timer."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Invoices",
+      "item": [
+        {
+          "name": "List Invoices",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/invoices?page=1&per_page=15",
+              "host": ["{{baseUrl}}"],
+              "path": ["invoices"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "per_page",
+                  "value": "15"
+                },
+                {
+                  "key": "status",
+                  "value": "sent",
+                  "disabled": true
+                },
+                {
+                  "key": "client_id",
+                  "value": "1",
+                  "disabled": true
+                },
+                {
+                  "key": "project_id",
+                  "value": "1",
+                  "disabled": true
+                }
+              ]
+            },
+            "description": "List all invoices with optional filtering."
+          },
+          "response": []
+        },
+        {
+          "name": "Create Invoice",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"client_id\": 1,\n    \"project_id\": 1,\n    \"due_date\": \"2025-02-15\",\n    \"line_items\": [\n        {\n            \"description\": \"Website Design - 20 hours @ $150/hr\",\n            \"quantity\": 20,\n            \"unit_price_cents\": 15000\n        },\n        {\n            \"description\": \"Development - 40 hours @ $175/hr\",\n            \"quantity\": 40,\n            \"unit_price_cents\": 17500\n        }\n    ],\n    \"notes\": \"Thank you for your business!\",\n    \"tax_rate\": 8.875\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/invoices",
+              "host": ["{{baseUrl}}"],
+              "path": ["invoices"]
+            },
+            "description": "Create a new invoice."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Invoice",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/invoices/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["invoices", "1"]
+            },
+            "description": "Get a specific invoice by ID."
+          },
+          "response": []
+        },
+        {
+          "name": "Update Invoice",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"due_date\": \"2025-02-28\",\n    \"notes\": \"Updated payment terms - Net 30\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/invoices/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["invoices", "1"]
+            },
+            "description": "Update an existing invoice (draft only)."
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Invoice",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/invoices/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["invoices", "1"]
+            },
+            "description": "Delete an invoice (draft only)."
+          },
+          "response": []
+        },
+        {
+          "name": "Send Invoice",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/invoices/1/send",
+              "host": ["{{baseUrl}}"],
+              "path": ["invoices", "1", "send"]
+            },
+            "description": "Send an invoice to the client via email."
+          },
+          "response": []
+        },
+        {
+          "name": "Download Invoice PDF",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/pdf"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/invoices/1/pdf",
+              "host": ["{{baseUrl}}"],
+              "path": ["invoices", "1", "pdf"]
+            },
+            "description": "Download the invoice as a PDF file."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "List Users",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/users?page=1&per_page=15",
+              "host": ["{{baseUrl}}"],
+              "path": ["users"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "per_page",
+                  "value": "15"
+                }
+              ]
+            },
+            "description": "List all users (admin only)."
+          },
+          "response": []
+        },
+        {
+          "name": "Create User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"John Doe\",\n    \"email\": \"john@agency.com\",\n    \"password\": \"secure-password-123\",\n    \"role\": \"staff\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/users",
+              "host": ["{{baseUrl}}"],
+              "path": ["users"]
+            },
+            "description": "Create a new user (admin only)."
+          },
+          "response": []
+        },
+        {
+          "name": "Get User",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/users/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["users", "1"]
+            },
+            "description": "Get a specific user by ID."
+          },
+          "response": []
+        },
+        {
+          "name": "Update User",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"John Smith\",\n    \"role\": \"manager\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/users/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["users", "1"]
+            },
+            "description": "Update an existing user."
+          },
+          "response": []
+        },
+        {
+          "name": "Delete User",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/users/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["users", "1"]
+            },
+            "description": "Delete a user (admin only)."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Webhooks",
+      "item": [
+        {
+          "name": "Register Webhook",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"url\": \"https://your-app.com/webhooks/agency-platform\",\n    \"events\": [\n        \"project.created\",\n        \"project.completed\",\n        \"invoice.sent\",\n        \"invoice.paid\"\n    ],\n    \"secret\": \"your-webhook-secret\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/webhooks",
+              "host": ["{{baseUrl}}"],
+              "path": ["webhooks"]
+            },
+            "description": "Register a new webhook endpoint to receive event notifications."
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

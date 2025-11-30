@@ -12,7 +12,8 @@ This directory contains the architecture documentation for the Agency Platform, 
 
 | Document | Description | Status |
 |----------|-------------|--------|
-| [arch-agency-platform.md](./arch-agency-platform.md) | Main architecture specification | Draft |
+| [arch-agency-platform.md](./arch-agency-platform.md) | Main architecture specification (arc42) | Active |
+| [database-schema.md](./database-schema.md) | Database schema and ER diagrams | Active |
 
 ## Architecture Template
 

@@ -1,0 +1,268 @@
+name: Documentation Quality Gates
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'docs/**'
+  pull_request:
+    paths:
+      - 'docs/**'
+
+jobs:
+  validate:
+    name: Validate Documentation
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Validate frontmatter
+        run: |
+          echo "Checking frontmatter in all markdown files..."
+
+          # Check requirements have required fields
+          for file in docs/01-requirements/req-*.md; do
+            if [ -f "$file" ]; then
+              if ! head -20 "$file" | grep -q "^id:"; then
+                echo "Missing 'id' in $file"
+                exit 1
+              fi
+              if ! head -20 "$file" | grep -q "^status:"; then
+                echo "Missing 'status' in $file"
+                exit 1
+              fi
+            fi
+          done
+
+          # Check ADRs have required fields
+          for file in docs/03-decisions/adr-*.md; do
+            if [ -f "$file" ]; then
+              if ! head -20 "$file" | grep -q "^id:"; then
+                echo "Missing 'id' in $file"
+                exit 1
+              fi
+              if ! head -20 "$file" | grep -q "^status:"; then
+                echo "Missing 'status' in $file"
+                exit 1
+              fi
+            fi
+          done
+
+          echo "✓ Frontmatter validation passed"
+
+      - name: Check for incomplete content
+        run: |
+          echo "Checking for TBD/TODO markers..."
+
+          # Find incomplete markers (excluding changelog entries)
+          if grep -r "TBD\|TODO\|FIXME" docs/ --include="*.md" | grep -v "Change Log" | grep -v "## Notes" | grep -v ".yml"; then
+            echo "Found incomplete markers in documentation"
+            # Warning only, not blocking
+            echo "::warning::Found TBD/TODO markers in documentation"
+          else
+            echo "✓ No incomplete markers found"
+          fi
+
+      - name: Validate internal links
+        run: |
+          echo "Checking internal markdown links..."
+
+          # Find all internal links and verify they exist
+          broken_links=0
+
+          for file in $(find docs -name "*.md"); do
+            # Extract relative links
+            links=$(grep -oP '\]\(\.\./[^)]+\.md\)' "$file" 2>/dev/null || true)
+
+            for link in $links; do
+              # Clean up the link
+              target=$(echo "$link" | sed 's/\](\(.*\))/\1/')
+              dir=$(dirname "$file")
+              resolved="$dir/$target"
+
+              # Normalize path
+              resolved=$(cd "$(dirname "$resolved")" 2>/dev/null && pwd)/$(basename "$resolved") 2>/dev/null || true
+
+              if [ ! -f "$resolved" ] && [ -n "$resolved" ]; then
+                echo "Broken link in $file: $target"
+                broken_links=$((broken_links + 1))
+              fi
+            done
+          done
+
+          if [ $broken_links -gt 0 ]; then
+            echo "::error::Found $broken_links broken internal links"
+            exit 1
+          fi
+
+          echo "✓ All internal links valid"
+
+      - name: Check README completeness
+        run: |
+          echo "Checking all directories have README files..."
+
+          # List of directories that must have READMEs
+          required_dirs=(
+            "docs/00-governance"
+            "docs/01-requirements"
+            "docs/02-architecture"
+            "docs/03-decisions"
+            "docs/04-development"
+            "docs/05-api"
+            "docs/06-testing"
+            "docs/07-operations"
+            "docs/08-security"
+            "docs/09-releases"
+          )
+
+          missing=0
+          for dir in "${required_dirs[@]}"; do
+            if [ ! -f "$dir/README.md" ]; then
+              echo "Missing README.md in $dir"
+              missing=$((missing + 1))
+            fi
+          done
+
+          if [ $missing -gt 0 ]; then
+            echo "::error::Found $missing directories without README.md"
+            exit 1
+          fi
+
+          echo "✓ All directories have README files"
+
+      - name: Validate OpenAPI spec
+        run: |
+          echo "Validating OpenAPI specification..."
+
+          if [ -f "docs/05-api/openapi.yaml" ]; then
+            npx @apidevtools/swagger-cli validate docs/05-api/openapi.yaml
+            echo "✓ OpenAPI spec is valid"
+          else
+            echo "::warning::OpenAPI spec not found"
+          fi
+
+      - name: Check traceability
+        run: |
+          echo "Checking requirement-to-ADR traceability..."
+
+          # Count requirements with "Satisfied By" section
+          total_reqs=$(find docs/01-requirements -name "req-*.md" | wc -l)
+
+          # Count requirements with ADR links
+          linked_reqs=$(grep -l "03-decisions/adr-" docs/01-requirements/req-*.md 2>/dev/null | wc -l || echo 0)
+
+          echo "Requirements with ADR links: $linked_reqs / $total_reqs"
+
+          # Calculate percentage
+          if [ $total_reqs -gt 0 ]; then
+            pct=$((linked_reqs * 100 / total_reqs))
+            echo "Traceability coverage: $pct%"
+
+            if [ $pct -lt 80 ]; then
+              echo "::warning::Traceability coverage below 80%"
+            else
+              echo "✓ Traceability coverage acceptable"
+            fi
+          fi
+
+      - name: Generate report
+        if: always()
+        run: |
+          echo "## Documentation Quality Report" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Statistics" >> $GITHUB_STEP_SUMMARY
+          echo "- Requirements: $(find docs/01-requirements -name 'req-*.md' | wc -l)" >> $GITHUB_STEP_SUMMARY
+          echo "- ADRs: $(find docs/03-decisions -name 'adr-*.md' | wc -l)" >> $GITHUB_STEP_SUMMARY
+          echo "- SOPs: $(find docs/00-governance -name 'sop-*.md' | wc -l)" >> $GITHUB_STEP_SUMMARY
+          echo "- Total Markdown Files: $(find docs -name '*.md' | wc -l)" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Status" >> $GITHUB_STEP_SUMMARY
+          echo "- Draft requirements: $(grep -l 'status: draft' docs/01-requirements/*.md 2>/dev/null | wc -l || echo 0)" >> $GITHUB_STEP_SUMMARY
+          echo "- Proposed ADRs: $(grep -l 'status.*proposed' docs/03-decisions/*.md 2>/dev/null | wc -l || echo 0)" >> $GITHUB_STEP_SUMMARY
+          echo "- Active SOPs: $(grep -l 'status: active' docs/00-governance/*.md 2>/dev/null | wc -l || echo 0)" >> $GITHUB_STEP_SUMMARY
+
+  markdown-lint:
+    name: Markdown Linting
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install markdownlint
+        run: npm install -g markdownlint-cli
+
+      - name: Create markdownlint config
+        run: |
+          cat > .markdownlint.json << 'EOF'
+          {
+            "default": true,
+            "MD013": false,
+            "MD033": false,
+            "MD041": false,
+            "MD024": { "siblings_only": true },
+            "MD036": false
+          }
+          EOF
+
+      - name: Run markdownlint
+        run: |
+          markdownlint 'docs/**/*.md' --ignore node_modules || true
+        continue-on-error: true
+
+  spell-check:
+    name: Spell Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install cspell
+        run: npm install -g cspell
+
+      - name: Create cspell config
+        run: |
+          cat > cspell.json << 'EOF'
+          {
+            "version": "0.2",
+            "language": "en",
+            "words": [
+              "Laravel", "Livewire", "Filament", "Sanctum", "Spatie",
+              "Postmark", "Stripe", "OAuth", "RBAC", "MFA",
+              "Volere", "MADR", "ADR", "SOP",
+              "invoiceable", "billable", "timesheet",
+              "frontmatter", "kebab", "camelCase",
+              "artisan", "tinker", "vite",
+              "mysql", "redis", "nginx"
+            ],
+            "ignorePaths": [
+              "node_modules/**",
+              "*.json",
+              "*.yaml",
+              "*.yml"
+            ]
+          }
+          EOF
+
+      - name: Run spell check
+        run: |
+          cspell "docs/**/*.md" || true
+        continue-on-error: true

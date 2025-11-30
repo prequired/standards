@@ -14,6 +14,8 @@ This directory contains runbooks and operational procedures for the Agency Platf
 |----------|-------------|----------|
 | [runbook-deployment.md](./runbook-deployment.md) | Deployment procedures and rollback | DevOps, Engineers |
 | [runbook-incidents.md](./runbook-incidents.md) | Incident response procedures | On-call, All Engineers |
+| [runbook-common-tasks.md](./runbook-common-tasks.md) | Daily operations (cache, queues, logs) | All Engineers |
+| [data-management.md](./data-management.md) | Backups, migrations, and data lifecycle | DevOps, Engineers |
 
 ## Quick Reference
 

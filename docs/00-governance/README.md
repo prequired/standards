@@ -15,6 +15,7 @@ This directory contains Standard Operating Procedures (SOPs) that define governa
 | [sop-000-master.md](./sop-000-master.md) | Golden Thread Traceability Standard | Active |
 | [sop-001-git-standards.md](./sop-001-git-standards.md) | Git Repository Standards and Workflow | Active |
 | [sop-002-quality-gates.md](./sop-002-quality-gates.md) | Documentation Quality Gates | Active |
+| [sop-003-documentation-lifecycle.md](./sop-003-documentation-lifecycle.md) | Document Lifecycle Management | Active |
 | [sop-004-api-guidelines.md](./sop-004-api-guidelines.md) | API Design and Governance Standards | Active |
 
 ## Golden Thread Principle
@@ -77,6 +78,11 @@ SOP-002 (Quality Gates)
     ├── Review Criteria
     ├── Approval Process
     └── Metrics
+
+SOP-003 (Documentation Lifecycle)
+    ├── Lifecycle Stages
+    ├── Transition Procedures
+    └── Version Control
 
 SOP-004 (API Guidelines)
     ├── API First Principle
