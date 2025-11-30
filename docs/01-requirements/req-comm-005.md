@@ -38,7 +38,7 @@ The system shall support @mentioning users in comments to notify and direct atte
 
 ## Satisfied By
 
-- *To be linked after ADR creation*
+- [ADR-0019: Notification System](../03-decisions/adr-0019-notification-system.md)
 
 ## Acceptance Criteria
 

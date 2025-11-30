@@ -38,7 +38,7 @@ Impersonation enables support staff to see exactly what a user sees, speeding up
 
 ## Satisfied By
 
-- *To be linked after ADR creation*
+- [ADR-0010: Admin Panel](../03-decisions/adr-0010-admin-panel.md)
 
 ## Acceptance Criteria
 

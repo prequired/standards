@@ -38,7 +38,7 @@ Structured feedback collection improves revision efficiency and maintains clear 
 
 ## Satisfied By
 
-- *To be linked after ADR creation*
+- [ADR-0018: Client Portal Architecture](../03-decisions/adr-0018-client-portal-architecture.md)
 
 ## Acceptance Criteria
 

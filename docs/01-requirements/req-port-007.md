@@ -38,7 +38,7 @@ Structured support tickets ensure issues are tracked, assigned, and resolved sys
 
 ## Satisfied By
 
-- *ADR needed: Build custom vs integrate Help Scout/Zendesk*
+- [ADR-0005: Support Tickets](../03-decisions/adr-0005-support-tickets.md)
 
 ## Acceptance Criteria
 

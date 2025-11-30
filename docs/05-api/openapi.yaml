@@ -1,0 +1,1240 @@
+openapi: 3.1.0
+info:
+  title: Agency Platform API
+  description: |
+    REST API for the Agency Platform - manage projects, clients, invoices, and time tracking.
+
+    ## Authentication
+    All endpoints require Bearer token authentication via Laravel Sanctum.
+
+    ## Rate Limiting
+    - Standard: 60 requests/minute
+    - Premium: 300 requests/minute
+  version: 1.0.0
+  contact:
+    name: API Support
+    email: api@agency-platform.com
+  license:
+    name: Proprietary
+
+servers:
+  - url: https://api.agency-platform.com/v1
+    description: Production
+  - url: https://api-staging.agency-platform.com/v1
+    description: Staging
+
+tags:
+  - name: Authentication
+    description: Token management
+  - name: Projects
+    description: Project management
+  - name: Clients
+    description: Client management
+  - name: Tasks
+    description: Task management
+  - name: Time Entries
+    description: Time tracking
+  - name: Invoices
+    description: Invoice management
+  - name: Users
+    description: User management
+
+security:
+  - bearerAuth: []
+
+paths:
+  /auth/token:
+    post:
+      tags:
+        - Authentication
+      summary: Obtain access token
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+                - password
+                - device_name
+              properties:
+                email:
+                  type: string
+                  format: email
+                  example: user@example.com
+                password:
+                  type: string
+                  format: password
+                device_name:
+                  type: string
+                  example: api-client
+                scopes:
+                  type: array
+                  items:
+                    type: string
+                    enum: [read, write, delete, admin]
+      responses:
+        '200':
+          description: Token issued
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    example: 1|abc123...
+                  expires_at:
+                    type: string
+                    format: date-time
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    delete:
+      tags:
+        - Authentication
+      summary: Revoke current token
+      responses:
+        '204':
+          description: Token revoked
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /auth/user:
+    get:
+      tags:
+        - Authentication
+      summary: Get authenticated user
+      responses:
+        '200':
+          description: User details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResource'
+
+  /projects:
+    get:
+      tags:
+        - Projects
+      summary: List projects
+      parameters:
+        - $ref: '#/components/parameters/PageParam'
+        - $ref: '#/components/parameters/PerPageParam'
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [draft, active, on_hold, completed, archived]
+        - name: client_id
+          in: query
+          schema:
+            type: integer
+        - name: include
+          in: query
+          schema:
+            type: string
+            example: client,tasks
+        - name: sort
+          in: query
+          schema:
+            type: string
+            example: -created_at
+      responses:
+        '200':
+          description: Paginated project list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectCollection'
+    post:
+      tags:
+        - Projects
+      summary: Create project
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProjectInput'
+      responses:
+        '201':
+          description: Project created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectResource'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+
+  /projects/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+    get:
+      tags:
+        - Projects
+      summary: Get project
+      responses:
+        '200':
+          description: Project details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectResource'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      tags:
+        - Projects
+      summary: Update project
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProjectInput'
+      responses:
+        '200':
+          description: Project updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectResource'
+    delete:
+      tags:
+        - Projects
+      summary: Delete project
+      responses:
+        '204':
+          description: Project deleted
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /projects/{id}/tasks:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+    get:
+      tags:
+        - Projects
+      summary: List project tasks
+      responses:
+        '200':
+          description: Task list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskCollection'
+
+  /clients:
+    get:
+      tags:
+        - Clients
+      summary: List clients
+      parameters:
+        - $ref: '#/components/parameters/PageParam'
+        - $ref: '#/components/parameters/PerPageParam'
+      responses:
+        '200':
+          description: Paginated client list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientCollection'
+    post:
+      tags:
+        - Clients
+      summary: Create client
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClientInput'
+      responses:
+        '201':
+          description: Client created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientResource'
+
+  /clients/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+    get:
+      tags:
+        - Clients
+      summary: Get client
+      responses:
+        '200':
+          description: Client details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientResource'
+    put:
+      tags:
+        - Clients
+      summary: Update client
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClientInput'
+      responses:
+        '200':
+          description: Client updated
+    delete:
+      tags:
+        - Clients
+      summary: Delete client
+      responses:
+        '204':
+          description: Client deleted
+
+  /tasks:
+    get:
+      tags:
+        - Tasks
+      summary: List all tasks
+      parameters:
+        - $ref: '#/components/parameters/PageParam'
+        - $ref: '#/components/parameters/PerPageParam'
+        - name: project_id
+          in: query
+          schema:
+            type: integer
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [pending, in_progress, completed]
+        - name: assignee_id
+          in: query
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Task list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskCollection'
+    post:
+      tags:
+        - Tasks
+      summary: Create task
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaskInput'
+      responses:
+        '201':
+          description: Task created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskResource'
+
+  /tasks/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+    get:
+      tags:
+        - Tasks
+      summary: Get task
+      responses:
+        '200':
+          description: Task details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskResource'
+    put:
+      tags:
+        - Tasks
+      summary: Update task
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaskInput'
+      responses:
+        '200':
+          description: Task updated
+    delete:
+      tags:
+        - Tasks
+      summary: Delete task
+      responses:
+        '204':
+          description: Task deleted
+
+  /tasks/{id}/complete:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+    post:
+      tags:
+        - Tasks
+      summary: Mark task complete
+      responses:
+        '200':
+          description: Task completed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskResource'
+
+  /time-entries:
+    get:
+      tags:
+        - Time Entries
+      summary: List time entries
+      parameters:
+        - $ref: '#/components/parameters/PageParam'
+        - $ref: '#/components/parameters/PerPageParam'
+        - name: project_id
+          in: query
+          schema:
+            type: integer
+        - name: task_id
+          in: query
+          schema:
+            type: integer
+        - name: user_id
+          in: query
+          schema:
+            type: integer
+        - name: from
+          in: query
+          schema:
+            type: string
+            format: date
+        - name: to
+          in: query
+          schema:
+            type: string
+            format: date
+      responses:
+        '200':
+          description: Time entry list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimeEntryCollection'
+    post:
+      tags:
+        - Time Entries
+      summary: Create time entry
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TimeEntryInput'
+      responses:
+        '201':
+          description: Time entry created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimeEntryResource'
+
+  /time-entries/start:
+    post:
+      tags:
+        - Time Entries
+      summary: Start timer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - project_id
+              properties:
+                project_id:
+                  type: integer
+                task_id:
+                  type: integer
+                description:
+                  type: string
+      responses:
+        '201':
+          description: Timer started
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimeEntryResource'
+
+  /time-entries/{id}/stop:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+    post:
+      tags:
+        - Time Entries
+      summary: Stop timer
+      responses:
+        '200':
+          description: Timer stopped
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimeEntryResource'
+
+  /invoices:
+    get:
+      tags:
+        - Invoices
+      summary: List invoices
+      parameters:
+        - $ref: '#/components/parameters/PageParam'
+        - $ref: '#/components/parameters/PerPageParam'
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [draft, sent, paid, overdue, cancelled]
+        - name: client_id
+          in: query
+          schema:
+            type: integer
+        - name: project_id
+          in: query
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Invoice list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvoiceCollection'
+    post:
+      tags:
+        - Invoices
+      summary: Create invoice
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InvoiceInput'
+      responses:
+        '201':
+          description: Invoice created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvoiceResource'
+
+  /invoices/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+    get:
+      tags:
+        - Invoices
+      summary: Get invoice
+      responses:
+        '200':
+          description: Invoice details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvoiceResource'
+    put:
+      tags:
+        - Invoices
+      summary: Update invoice
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InvoiceInput'
+      responses:
+        '200':
+          description: Invoice updated
+    delete:
+      tags:
+        - Invoices
+      summary: Delete invoice (draft only)
+      responses:
+        '204':
+          description: Invoice deleted
+        '422':
+          description: Cannot delete non-draft invoice
+
+  /invoices/{id}/send:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+    post:
+      tags:
+        - Invoices
+      summary: Send invoice to client
+      responses:
+        '200':
+          description: Invoice sent
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvoiceResource'
+
+  /invoices/{id}/pdf:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+    get:
+      tags:
+        - Invoices
+      summary: Download invoice PDF
+      responses:
+        '200':
+          description: PDF file
+          content:
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+
+  /users:
+    get:
+      tags:
+        - Users
+      summary: List users (admin only)
+      parameters:
+        - $ref: '#/components/parameters/PageParam'
+        - $ref: '#/components/parameters/PerPageParam'
+      responses:
+        '200':
+          description: User list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserCollection'
+    post:
+      tags:
+        - Users
+      summary: Create user (admin only)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserInput'
+      responses:
+        '201':
+          description: User created
+
+  /users/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+    get:
+      tags:
+        - Users
+      summary: Get user
+      responses:
+        '200':
+          description: User details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResource'
+    put:
+      tags:
+        - Users
+      summary: Update user
+      responses:
+        '200':
+          description: User updated
+    delete:
+      tags:
+        - Users
+      summary: Delete user (admin only)
+      responses:
+        '204':
+          description: User deleted
+
+  /webhooks:
+    post:
+      tags:
+        - Webhooks
+      summary: Register webhook
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - url
+                - events
+              properties:
+                url:
+                  type: string
+                  format: uri
+                events:
+                  type: array
+                  items:
+                    type: string
+                    enum:
+                      - project.created
+                      - project.updated
+                      - project.completed
+                      - invoice.sent
+                      - invoice.paid
+                      - invoice.overdue
+                      - task.completed
+                secret:
+                  type: string
+      responses:
+        '201':
+          description: Webhook registered
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+
+  parameters:
+    PageParam:
+      name: page
+      in: query
+      schema:
+        type: integer
+        default: 1
+    PerPageParam:
+      name: per_page
+      in: query
+      schema:
+        type: integer
+        default: 15
+        maximum: 100
+
+  responses:
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    ValidationError:
+      description: Validation failed
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ValidationError'
+
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+
+    ValidationError:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              example: validation_error
+            message:
+              type: string
+            details:
+              type: array
+              items:
+                type: object
+                properties:
+                  field:
+                    type: string
+                  message:
+                    type: string
+
+    PaginationMeta:
+      type: object
+      properties:
+        current_page:
+          type: integer
+        per_page:
+          type: integer
+        total:
+          type: integer
+        last_page:
+          type: integer
+
+    PaginationLinks:
+      type: object
+      properties:
+        first:
+          type: string
+        last:
+          type: string
+        prev:
+          type: string
+          nullable: true
+        next:
+          type: string
+          nullable: true
+
+    ProjectInput:
+      type: object
+      required:
+        - name
+        - client_id
+      properties:
+        name:
+          type: string
+          maxLength: 255
+        client_id:
+          type: integer
+        description:
+          type: string
+        status:
+          type: string
+          enum: [draft, active, on_hold, completed, archived]
+        budget_cents:
+          type: integer
+        due_date:
+          type: string
+          format: date
+
+    ProjectResource:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: integer
+            type:
+              type: string
+              example: projects
+            attributes:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+                status:
+                  type: string
+                budget_cents:
+                  type: integer
+                due_date:
+                  type: string
+                  format: date
+                created_at:
+                  type: string
+                  format: date-time
+                updated_at:
+                  type: string
+                  format: date-time
+            relationships:
+              type: object
+              properties:
+                client:
+                  type: object
+                  properties:
+                    data:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        type:
+                          type: string
+
+    ProjectCollection:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProjectResource/properties/data'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+        links:
+          $ref: '#/components/schemas/PaginationLinks'
+
+    ClientInput:
+      type: object
+      required:
+        - name
+        - email
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        company:
+          type: string
+        phone:
+          type: string
+        address:
+          type: string
+
+    ClientResource:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: integer
+            type:
+              type: string
+              example: clients
+            attributes:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                company:
+                  type: string
+                phone:
+                  type: string
+                created_at:
+                  type: string
+                  format: date-time
+
+    ClientCollection:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ClientResource/properties/data'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+        links:
+          $ref: '#/components/schemas/PaginationLinks'
+
+    TaskInput:
+      type: object
+      required:
+        - title
+        - project_id
+      properties:
+        title:
+          type: string
+        project_id:
+          type: integer
+        description:
+          type: string
+        assignee_id:
+          type: integer
+        status:
+          type: string
+          enum: [pending, in_progress, completed]
+        due_date:
+          type: string
+          format: date
+        estimated_hours:
+          type: number
+
+    TaskResource:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: integer
+            type:
+              type: string
+              example: tasks
+            attributes:
+              type: object
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+                status:
+                  type: string
+                due_date:
+                  type: string
+                  format: date
+                estimated_hours:
+                  type: number
+                created_at:
+                  type: string
+                  format: date-time
+
+    TaskCollection:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/TaskResource/properties/data'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+        links:
+          $ref: '#/components/schemas/PaginationLinks'
+
+    TimeEntryInput:
+      type: object
+      required:
+        - project_id
+        - duration_minutes
+      properties:
+        project_id:
+          type: integer
+        task_id:
+          type: integer
+        description:
+          type: string
+        duration_minutes:
+          type: integer
+        date:
+          type: string
+          format: date
+        billable:
+          type: boolean
+          default: true
+
+    TimeEntryResource:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: integer
+            type:
+              type: string
+              example: time_entries
+            attributes:
+              type: object
+              properties:
+                description:
+                  type: string
+                duration_minutes:
+                  type: integer
+                date:
+                  type: string
+                  format: date
+                billable:
+                  type: boolean
+                started_at:
+                  type: string
+                  format: date-time
+                  nullable: true
+                stopped_at:
+                  type: string
+                  format: date-time
+                  nullable: true
+
+    TimeEntryCollection:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/TimeEntryResource/properties/data'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+        links:
+          $ref: '#/components/schemas/PaginationLinks'
+
+    InvoiceInput:
+      type: object
+      required:
+        - client_id
+      properties:
+        client_id:
+          type: integer
+        project_id:
+          type: integer
+        due_date:
+          type: string
+          format: date
+        line_items:
+          type: array
+          items:
+            type: object
+            required:
+              - description
+              - quantity
+              - unit_price_cents
+            properties:
+              description:
+                type: string
+              quantity:
+                type: number
+              unit_price_cents:
+                type: integer
+        notes:
+          type: string
+        tax_rate:
+          type: number
+
+    InvoiceResource:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: integer
+            type:
+              type: string
+              example: invoices
+            attributes:
+              type: object
+              properties:
+                number:
+                  type: string
+                  example: INV-2025-0001
+                status:
+                  type: string
+                  enum: [draft, sent, paid, overdue, cancelled]
+                amount_cents:
+                  type: integer
+                tax_cents:
+                  type: integer
+                total_cents:
+                  type: integer
+                due_date:
+                  type: string
+                  format: date
+                sent_at:
+                  type: string
+                  format: date-time
+                  nullable: true
+                paid_at:
+                  type: string
+                  format: date-time
+                  nullable: true
+                created_at:
+                  type: string
+                  format: date-time
+
+    InvoiceCollection:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/InvoiceResource/properties/data'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+        links:
+          $ref: '#/components/schemas/PaginationLinks'
+
+    UserInput:
+      type: object
+      required:
+        - name
+        - email
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          format: password
+        role:
+          type: string
+          enum: [admin, manager, staff]
+
+    UserResource:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: integer
+            type:
+              type: string
+              example: users
+            attributes:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                role:
+                  type: string
+                created_at:
+                  type: string
+                  format: date-time
+
+    UserCollection:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserResource/properties/data'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+        links:
+          $ref: '#/components/schemas/PaginationLinks'

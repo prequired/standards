@@ -38,7 +38,7 @@ Online payments accelerate cash collection, reduce friction for clients, and eli
 
 ## Satisfied By
 
-- *To be linked after ADR creation*
+- [ADR-0014: Payment Processing](../03-decisions/adr-0014-payment-processing.md)
 
 ## Acceptance Criteria
 

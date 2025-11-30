@@ -38,7 +38,7 @@ Integration with existing PM tools allows teams to continue using familiar workf
 
 ## Satisfied By
 
-- *ADR needed: Which PM tool(s) to support*
+- [ADR-0010: Admin Panel](../03-decisions/adr-0010-admin-panel.md) (native integrations)
 
 ## Acceptance Criteria
 

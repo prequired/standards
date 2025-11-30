@@ -38,7 +38,7 @@ Lead capture forms collect prospect information in exchange for valuable content
 
 ## Satisfied By
 
-- *ADR needed: Build custom vs embed ConvertKit/Mailchimp forms*
+- [ADR-0007: Email Marketing](../03-decisions/adr-0007-email-marketing.md)
 
 ## Acceptance Criteria
 

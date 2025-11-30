@@ -38,7 +38,7 @@ Pricing information qualifies prospects, sets expectations, and reduces unqualif
 
 ## Satisfied By
 
-- *To be linked after ADR creation*
+- [ADR-0017: Marketing Site Architecture](../03-decisions/adr-0017-marketing-site-architecture.md)
 
 ## Acceptance Criteria
 

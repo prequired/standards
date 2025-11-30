@@ -39,7 +39,8 @@ Social login reduces friction for user registration and login, improving convers
 
 ## Satisfied By
 
-- *To be linked after ADR creation*
+- [ADR-0010: Admin Panel](../03-decisions/adr-0010-admin-panel.md)
+- [ADR-0012: Security & Data Protection](../03-decisions/adr-0012-security-data-protection.md)
 
 ## Acceptance Criteria
 

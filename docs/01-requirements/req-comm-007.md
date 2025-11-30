@@ -38,7 +38,7 @@ SMS provides a high-visibility channel for critical alerts that require immediat
 
 ## Satisfied By
 
-- *To be linked after ADR creation*
+- [ADR-0004: Messaging/Chat](../03-decisions/adr-0004-messaging-chat.md)
 
 ## Acceptance Criteria
 

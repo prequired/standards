@@ -38,7 +38,7 @@ Understanding client engagement helps identify at-risk relationships and opportu
 
 ## Satisfied By
 
-- *To be linked after ADR creation*
+- [ADR-0013: Analytics & Reporting](../03-decisions/adr-0013-analytics-reporting.md)
 
 ## Acceptance Criteria
 

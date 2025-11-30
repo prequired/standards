@@ -34,11 +34,11 @@ Tasks break projects into actionable work items, enable assignment to team membe
 
 - **Depends On:** REQ-PROJ-001 (project management), REQ-USER-001 (staff profiles)
 - **Blocks:** REQ-PROJ-005 (time tracking)
-- **External:** Potential PM tool integration (ADR needed)
+- **External:** None (custom build per ADR-0001)
 
 ## Satisfied By
 
-- *ADR needed: Build custom vs integrate external PM tool*
+- [ADR-0001: Project Management Tool](../03-decisions/adr-0001-project-management-tool.md)
 
 ## Acceptance Criteria
 

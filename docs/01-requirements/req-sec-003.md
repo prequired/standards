@@ -38,7 +38,7 @@ CSRF protection prevents attackers from tricking authenticated users into perfor
 
 ## Satisfied By
 
-- *To be linked after ADR creation*
+- [ADR-0012: Security & Data Protection](../03-decisions/adr-0012-security-data-protection.md)
 
 ## Acceptance Criteria
 

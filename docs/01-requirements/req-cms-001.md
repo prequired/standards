@@ -38,7 +38,7 @@ A blog drives organic traffic, establishes thought leadership, and supports cont
 
 ## Satisfied By
 
-- *ADR needed: Build custom vs use Statamic/Filament/headless WordPress*
+- [ADR-0003: CMS Approach](../03-decisions/adr-0003-cms-approach.md)
 
 ## Acceptance Criteria
 

@@ -38,7 +38,7 @@ The homepage is the primary entry point for prospects and the foundation of the 
 
 ## Satisfied By
 
-- *To be linked after ADR creation*
+- [ADR-0017: Marketing Site Architecture](../03-decisions/adr-0017-marketing-site-architecture.md)
 
 ## Acceptance Criteria
 

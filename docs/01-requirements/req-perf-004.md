@@ -38,7 +38,7 @@ CDN distribution reduces latency for global users and offloads traffic from appl
 
 ## Satisfied By
 
-- *To be linked after ADR creation*
+- [ADR-0015: File Storage & CDN](../03-decisions/adr-0015-file-storage-cdn.md)
 
 ## Acceptance Criteria
 

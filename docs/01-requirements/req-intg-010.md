@@ -38,7 +38,7 @@ Proactive error monitoring enables faster issue resolution, improves reliability
 
 ## Satisfied By
 
-- *To be linked after ADR creation*
+- [ADR-0016: Error Monitoring & Logging](../03-decisions/adr-0016-error-monitoring-logging.md)
 
 ## Acceptance Criteria
 

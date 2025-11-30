@@ -38,7 +38,7 @@ A media library prevents duplicate uploads, enables reuse, and provides consiste
 
 ## Satisfied By
 
-- *To be linked after ADR creation*
+- [ADR-0003: CMS Approach](../03-decisions/adr-0003-cms-approach.md)
 
 ## Acceptance Criteria
 

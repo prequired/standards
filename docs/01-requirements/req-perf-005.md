@@ -38,7 +38,7 @@ Inefficient database queries are the most common cause of application slowness; 
 
 ## Satisfied By
 
-- *To be linked after ADR creation*
+- [ADR-0020: Performance Optimization](../03-decisions/adr-0020-performance-optimization.md)
 
 ## Acceptance Criteria
 

@@ -38,7 +38,7 @@ Audit logs support incident investigation, compliance requirements, and accounta
 
 ## Satisfied By
 
-- *To be linked after ADR creation*
+- [ADR-0012: Security & Data Protection](../03-decisions/adr-0012-security-data-protection.md)
 
 ## Acceptance Criteria
 

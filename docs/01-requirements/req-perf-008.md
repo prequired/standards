@@ -38,7 +38,7 @@ Proactive monitoring enables faster incident response and helps maintain service
 
 ## Satisfied By
 
-- *To be linked after ADR creation*
+- [ADR-0011: Infrastructure & Hosting](../03-decisions/adr-0011-infrastructure-hosting.md)
 
 ## Acceptance Criteria
 

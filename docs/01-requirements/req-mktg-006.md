@@ -38,7 +38,7 @@ Newsletter builds an owned audience for content distribution and marketing commu
 
 ## Satisfied By
 
-- *ADR needed: ConvertKit vs Mailchimp vs other*
+- [ADR-0007: Email Marketing](../03-decisions/adr-0007-email-marketing.md)
 
 ## Acceptance Criteria
 

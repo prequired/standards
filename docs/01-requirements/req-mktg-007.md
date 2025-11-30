@@ -38,7 +38,7 @@ Testimonials build trust and credibility by showing real client satisfaction.
 
 ## Satisfied By
 
-- *To be linked after ADR creation*
+- [ADR-0017: Marketing Site Architecture](../03-decisions/adr-0017-marketing-site-architecture.md)
 
 ## Acceptance Criteria
 

@@ -38,7 +38,7 @@ Email notifications reach users when they're not active on the platform, ensurin
 
 ## Satisfied By
 
-- *To be linked after ADR creation*
+- [ADR-0008: Transactional Email](../03-decisions/adr-0008-transactional-email.md)
 
 ## Acceptance Criteria
 

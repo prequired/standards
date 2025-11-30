@@ -34,11 +34,11 @@ Accurate time tracking enables hourly billing, profitability analysis, and estim
 
 - **Depends On:** REQ-PROJ-001 (projects), REQ-PROJ-003 (tasks)
 - **Blocks:** REQ-BILL-001 (time-based invoicing)
-- **External:** Potential time tracking tool integration (ADR needed)
+- **External:** None (custom build per ADR-0006)
 
 ## Satisfied By
 
-- *ADR needed: Build custom vs integrate Toggl/Harvest/Clockify*
+- [ADR-0006: Time Tracking](../03-decisions/adr-0006-time-tracking.md)
 
 ## Acceptance Criteria
 

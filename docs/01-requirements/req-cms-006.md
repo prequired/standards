@@ -38,7 +38,7 @@ Workflow ensures content quality through review before public visibility, and pr
 
 ## Satisfied By
 
-- *To be linked after ADR creation*
+- [ADR-0003: CMS Approach](../03-decisions/adr-0003-cms-approach.md)
 
 ## Acceptance Criteria
 

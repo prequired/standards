@@ -38,7 +38,7 @@ High availability ensures clients can access the portal and staff can work witho
 
 ## Satisfied By
 
-- *To be linked after ADR creation*
+- [ADR-0011: Infrastructure & Hosting](../03-decisions/adr-0011-infrastructure-hosting.md)
 
 ## Acceptance Criteria
 

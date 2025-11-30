@@ -38,7 +38,7 @@ Accounting sync eliminates double-entry, ensures financial accuracy, and streaml
 
 ## Satisfied By
 
-- *ADR needed: QuickBooks vs Xero*
+- [ADR-0010: Admin Panel](../03-decisions/adr-0010-admin-panel.md) (accounting integration TBD)
 
 ## Acceptance Criteria
 

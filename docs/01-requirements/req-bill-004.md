@@ -38,7 +38,7 @@ PDF invoices are the standard format for business records, required for accounti
 
 ## Satisfied By
 
-- *To be linked after ADR creation*
+- [ADR-0002: Invoicing Solution](../03-decisions/adr-0002-invoicing-solution.md)
 
 ## Acceptance Criteria
 

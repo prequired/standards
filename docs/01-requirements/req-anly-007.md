@@ -38,7 +38,7 @@ Marketing analytics provide insights into traffic sources, user behavior, and co
 
 ## Satisfied By
 
-- *To be linked after ADR creation*
+- [ADR-0013: Analytics & Reporting](../03-decisions/adr-0013-analytics-reporting.md)
 
 ## Acceptance Criteria
 

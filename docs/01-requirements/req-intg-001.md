@@ -38,7 +38,7 @@ Stripe is the industry-leading payment platform, providing reliable, secure paym
 
 ## Satisfied By
 
-- *To be linked after ADR creation*
+- [ADR-0014: Payment Processing](../03-decisions/adr-0014-payment-processing.md)
 
 ## Acceptance Criteria
 

@@ -38,7 +38,7 @@ Visibility into business metrics enables data-driven decisions, early problem de
 
 ## Satisfied By
 
-- *To be linked after ADR creation*
+- [ADR-0013: Analytics & Reporting](../03-decisions/adr-0013-analytics-reporting.md)
 
 ## Acceptance Criteria
 

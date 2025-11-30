@@ -38,7 +38,7 @@ Contract access allows clients to reference terms, scope, and agreements without
 
 ## Satisfied By
 
-- *To be linked after ADR creation*
+- [ADR-0018: Client Portal Architecture](../03-decisions/adr-0018-client-portal-architecture.md)
 
 ## Acceptance Criteria
 

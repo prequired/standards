@@ -38,7 +38,7 @@ In-app notifications provide immediate awareness of important events while users
 
 ## Satisfied By
 
-- *To be linked after ADR creation*
+- [ADR-0019: Notification System](../03-decisions/adr-0019-notification-system.md)
 
 ## Acceptance Criteria
 

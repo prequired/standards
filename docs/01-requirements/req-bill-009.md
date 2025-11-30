@@ -38,7 +38,7 @@ Proposals are the start of the sales cycle. Integrated proposals create a seamle
 
 ## Satisfied By
 
-- *ADR needed: Build custom vs integrate PandaDoc/Qwilr/Proposify*
+- [ADR-0009: Proposal/Quotes](../03-decisions/adr-0009-proposal-quotes.md)
 
 ## Acceptance Criteria
 

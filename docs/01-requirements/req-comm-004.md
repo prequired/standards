@@ -38,7 +38,7 @@ Not all communication fits within project comments. Direct messaging handles acc
 
 ## Satisfied By
 
-- *ADR needed: Build custom vs integrate Intercom/Crisp/HelpScout*
+- [ADR-0004: Messaging/Chat](../03-decisions/adr-0004-messaging-chat.md)
 
 ## Acceptance Criteria
 

@@ -38,7 +38,7 @@ User preferences improve satisfaction by allowing customization of the experienc
 
 ## Satisfied By
 
-- *To be linked after ADR creation*
+- [ADR-0010: Admin Panel](../03-decisions/adr-0010-admin-panel.md)
 
 ## Acceptance Criteria
 

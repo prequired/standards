@@ -38,7 +38,7 @@ Projects are the core entity around which all agency work revolves. They connect
 
 ## Satisfied By
 
-- *ADR needed: Build custom vs integrate external PM tool*
+- [ADR-0001: Project Management Tool](../03-decisions/adr-0001-project-management-tool.md)
 
 ## Acceptance Criteria
 
@@ -55,7 +55,7 @@ Projects are the core entity around which all agency work revolves. They connect
 
 ## Notes
 
-- Critical ADR decision: build custom or integrate with Asana/ClickUp/Monday
+- Satisfied by ADR-0001: custom Laravel build chosen
 - If integrating, this becomes a sync/display requirement instead
 - Consider project templates for common engagement types
 

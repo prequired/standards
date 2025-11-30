@@ -38,7 +38,7 @@ CRM integration unifies sales pipeline, client history, and project data for bet
 
 ## Satisfied By
 
-- *ADR needed: HubSpot vs Salesforce vs none*
+- [ADR-0010: Admin Panel](../03-decisions/adr-0010-admin-panel.md) (CRM integration TBD)
 
 ## Acceptance Criteria
 

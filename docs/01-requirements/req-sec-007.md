@@ -40,7 +40,7 @@ Backups protect against data loss from hardware failure, human error, or securit
 
 ## Satisfied By
 
-- *To be linked after ADR creation*
+- [ADR-0012: Security & Data Protection](../03-decisions/adr-0012-security-data-protection.md)
 
 ## Acceptance Criteria
 

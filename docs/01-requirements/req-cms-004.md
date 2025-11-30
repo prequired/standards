@@ -38,7 +38,7 @@ Proper SEO metadata improves search engine rankings and controls how content app
 
 ## Satisfied By
 
-- *To be linked after ADR creation*
+- [ADR-0003: CMS Approach](../03-decisions/adr-0003-cms-approach.md)
 
 ## Acceptance Criteria
 

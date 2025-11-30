@@ -38,7 +38,7 @@ Dedicated email service ensures high deliverability, proper authentication (SPF/
 
 ## Satisfied By
 
-- *ADR needed: Postmark vs SendGrid vs SES*
+- [ADR-0008: Transactional Email](../03-decisions/adr-0008-transactional-email.md)
 
 ## Acceptance Criteria
 

@@ -38,7 +38,7 @@ Cloud storage provides scalable, durable, cost-effective file storage with globa
 
 ## Satisfied By
 
-- *To be linked after ADR creation*
+- [ADR-0015: File Storage & CDN](../03-decisions/adr-0015-file-storage-cdn.md)
 
 ## Acceptance Criteria
 

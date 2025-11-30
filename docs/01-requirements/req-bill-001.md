@@ -38,7 +38,7 @@ Invoicing is essential for agency cash flow. Integrated invoicing reduces manual
 
 ## Satisfied By
 
-- *ADR needed: Build custom vs integrate Stripe Invoicing/FreshBooks*
+- [ADR-0002: Invoicing Solution](../03-decisions/adr-0002-invoicing-solution.md)
 
 ## Acceptance Criteria
 

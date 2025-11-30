@@ -38,7 +38,7 @@ Categories and tags help users find related content and improve SEO through topi
 
 ## Satisfied By
 
-- *To be linked after ADR creation*
+- [ADR-0003: CMS Approach](../03-decisions/adr-0003-cms-approach.md)
 
 ## Acceptance Criteria
 

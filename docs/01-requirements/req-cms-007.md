@@ -38,7 +38,7 @@ Scheduled publishing enables content planning, consistent publishing cadence, an
 
 ## Satisfied By
 
-- *To be linked after ADR creation*
+- [ADR-0003: CMS Approach](../03-decisions/adr-0003-cms-approach.md)
 
 ## Acceptance Criteria
 

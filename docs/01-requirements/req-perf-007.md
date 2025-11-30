@@ -38,7 +38,7 @@ Auto-scaling ensures consistent performance during peak usage while optimizing c
 
 ## Satisfied By
 
-- *To be linked after ADR creation*
+- [ADR-0011: Infrastructure & Hosting](../03-decisions/adr-0011-infrastructure-hosting.md)
 
 ## Acceptance Criteria
 

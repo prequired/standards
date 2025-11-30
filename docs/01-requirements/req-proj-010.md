@@ -38,7 +38,7 @@ Resource allocation enables capacity planning, prevents overcommitment, and supp
 
 ## Satisfied By
 
-- *To be linked after ADR creation*
+- [ADR-0001: Project Management Tool](../03-decisions/adr-0001-project-management-tool.md)
 
 ## Acceptance Criteria
 

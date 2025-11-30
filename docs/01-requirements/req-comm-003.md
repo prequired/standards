@@ -38,7 +38,7 @@ Project-level comments keep discussions contextual, reduce email threads, and cr
 
 ## Satisfied By
 
-- *To be linked after ADR creation*
+- [ADR-0019: Notification System](../03-decisions/adr-0019-notification-system.md)
 
 ## Acceptance Criteria
 

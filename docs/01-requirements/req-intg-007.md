@@ -38,7 +38,7 @@ Slack is a common team communication hub; sending notifications there ensures vi
 
 ## Satisfied By
 
-- *To be linked after ADR creation*
+- [ADR-0010: Admin Panel](../03-decisions/adr-0010-admin-panel.md)
 
 ## Acceptance Criteria
 

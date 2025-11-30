@@ -38,7 +38,7 @@ Fast API responses ensure responsive user interfaces and support real-time featu
 
 ## Satisfied By
 
-- *To be linked after ADR creation*
+- [ADR-0020: Performance Optimization](../03-decisions/adr-0020-performance-optimization.md)
 
 ## Acceptance Criteria
 
