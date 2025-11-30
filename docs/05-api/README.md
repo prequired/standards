@@ -13,6 +13,8 @@ This directory contains API specifications and documentation for the Agency Plat
 | Document | Description |
 |----------|-------------|
 | [api-specification.md](./api-specification.md) | Complete API reference with endpoints, authentication, and examples |
+| [openapi.yaml](./openapi.yaml) | OpenAPI 3.1 specification for code generation and validation |
+| [postman-collection.json](./postman-collection.json) | Postman collection for API testing and exploration |
 
 ## Quick Reference
 
