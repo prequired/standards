@@ -13,8 +13,9 @@ This directory contains Standard Operating Procedures (SOPs) that define governa
 | Document | Description | Status |
 |----------|-------------|--------|
 | [sop-000-master.md](./sop-000-master.md) | Golden Thread Traceability Standard | Active |
-| [sop-001-quality-gates.md](./sop-001-quality-gates.md) | Documentation Quality Gates | Active |
-| [sop-004-git-standards.md](./sop-004-git-standards.md) | Git and Version Control Standards | Active |
+| [sop-001-git-standards.md](./sop-001-git-standards.md) | Git Repository Standards and Workflow | Active |
+| [sop-002-quality-gates.md](./sop-002-quality-gates.md) | Documentation Quality Gates | Active |
+| [sop-004-api-guidelines.md](./sop-004-api-guidelines.md) | API Design and Governance Standards | Active |
 
 ## Golden Thread Principle
 
@@ -46,7 +47,7 @@ Documentation must pass quality gates before approval:
 | Clarity | Clear, unambiguous language |
 | Consistency | Follows templates and standards |
 
-See [SOP-001: Quality Gates](./sop-001-quality-gates.md) for details.
+See [SOP-002: Quality Gates](./sop-002-quality-gates.md) for details.
 
 ## SOP Numbering
 
@@ -67,15 +68,20 @@ SOP-000 (Golden Thread)
     ├── Architecture Standards
     └── Implementation Standards
 
-SOP-001 (Quality Gates)
+SOP-001 (Git Standards)
+    ├── Branching Strategy
+    ├── Commit Conventions
+    └── PR Requirements
+
+SOP-002 (Quality Gates)
     ├── Review Criteria
     ├── Approval Process
     └── Metrics
 
-SOP-004 (Git Standards)
-    ├── Branching Strategy
-    ├── Commit Conventions
-    └── PR Requirements
+SOP-004 (API Guidelines)
+    ├── API First Principle
+    ├── Design Standards
+    └── Versioning
 ```
 
 ## Related Documentation

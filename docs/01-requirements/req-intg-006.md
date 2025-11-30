@@ -38,7 +38,9 @@ Accounting sync eliminates double-entry, ensures financial accuracy, and streaml
 
 ## Satisfied By
 
-- [ADR-0010: Admin Panel](../03-decisions/adr-0010-admin-panel.md) (accounting integration TBD)
+- [ADR-0010: Admin Panel](../03-decisions/adr-0010-admin-panel.md) - Provides integration framework
+- [ADR-0002: Invoicing Solution](../03-decisions/adr-0002-invoicing-solution.md) - Invoice data source
+- **Note:** Third-party accounting sync is Phase 2. Initial release uses manual export via ADR-0013 Analytics.
 
 ## Acceptance Criteria
 

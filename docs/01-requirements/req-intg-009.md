@@ -38,7 +38,8 @@ CRM integration unifies sales pipeline, client history, and project data for bet
 
 ## Satisfied By
 
-- [ADR-0010: Admin Panel](../03-decisions/adr-0010-admin-panel.md) (CRM integration TBD)
+- [ADR-0010: Admin Panel](../03-decisions/adr-0010-admin-panel.md) - Native client management via Filament
+- **Note:** External CRM integration is Phase 2. Initial release provides built-in client management per ADR-0010.
 
 ## Acceptance Criteria
 
